@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec
 RDEPENDS:${PN} = "alsa-ucm-conf"
 
 SRC_URI = "\
+        file://aquila-wm8904-HiFi.conf \
+        file://aquila-wm8904.conf \
         file://verdin-nau8822-HiFi.conf \
         file://verdin-nau8822.conf \
         file://verdin-wm8904-HiFi.conf \
@@ -18,6 +20,8 @@ do_install () {
         nau8822_dir="${D}${datadir}/alsa/ucm2/Toradex/nau8822"
 
         install -d $wm8904_dir
+        install -m 0644 ${S}/aquila-wm8904-HiFi.conf $wm8904_dir
+        install -m 0644 ${S}/aquila-wm8904.conf $wm8904_dir
         install -m 0644 ${S}/verdin-wm8904-HiFi.conf $wm8904_dir
         install -m 0644 ${S}/verdin-wm8904.conf $wm8904_dir
 
@@ -26,6 +30,8 @@ do_install () {
         install -m 0644 ${S}/verdin-nau8822.conf $nau8822_dir
 
         install -d "${D}${datadir}/alsa/ucm2/conf.d/simple-card"
+        ln -fsr ${wm8904_dir}/aquila-wm8904.conf \
+                "${D}${datadir}/alsa/ucm2/conf.d/simple-card"
         ln -fsr ${wm8904_dir}/verdin-wm8904.conf \
                 "${D}${datadir}/alsa/ucm2/conf.d/simple-card"
         ln -fsr ${nau8822_dir}/verdin-nau8822.conf \
