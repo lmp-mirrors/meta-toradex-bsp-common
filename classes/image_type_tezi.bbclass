@@ -511,7 +511,7 @@ IMAGE_CMD:teziimg () {
 	bbnote "Create Toradex Easy Installer tarball"
 
 	# Copy image json file to ${WORKDIR}/image-json
-	cp ${IMGDEPLOYDIR}/image*.json ${WORKDIR}/image-json/image.json
+	cp ${IMGDEPLOYDIR}/image-${IMAGE_BASENAME}.json ${WORKDIR}/image-json/image.json
 
 	if [ -n "$TEZI_EULA_URL" ]; then
 		curl -k --retry 5 -O ${TEZI_EULA_URL} || true
