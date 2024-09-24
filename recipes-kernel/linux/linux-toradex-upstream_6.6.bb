@@ -34,6 +34,8 @@ TDX_PATCHES = " \
     file://0002-arm64-dts-imx8mm-Add-optional-overdrive-DTSI.patch \
     file://0003-arm64-dts-freescale-imx8mm-verdin-Fix-GPU-speed.patch \
     file://0001-pmdomain-imx8m-blk-ctrl-fix-suspend-resume-order.patch \
+    file://0001-arm64-dts-freescale-imx8mm-verdin-add-label-to-som-a.patch \
+    file://0002-arm64-dts-freescale-imx8mm-verdin-Add-Ivy-carrier-bo.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.44"
