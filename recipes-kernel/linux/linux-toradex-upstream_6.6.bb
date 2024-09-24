@@ -28,6 +28,8 @@ TDX_PATCHES = " \
     file://0004-arm64-dts-freescale-imx8mm-verdin-dahlia-support-.patch \
     file://0001-arm64-dts-ti-k3-am62-verdin-replace-sleep-moci-ho.patch \
     file://0002-arm64-dts-ti-k3-am62-verdin-dahlia-support-sleep-.patch \
+    file://0001-can-mcp251xfd-properly-indent-labels.patch \
+    file://0001-can-mcp251xfd-move-mcp251xfd_timestamp_start-stop-in.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.44"
