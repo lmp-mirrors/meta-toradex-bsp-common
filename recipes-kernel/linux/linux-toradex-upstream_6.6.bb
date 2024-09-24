@@ -33,6 +33,7 @@ TDX_PATCHES = " \
     file://0001-drm-etnaviv-don-t-disable-TS-on-MMUv2-core-when-movi.patch \
     file://0002-arm64-dts-imx8mm-Add-optional-overdrive-DTSI.patch \
     file://0003-arm64-dts-freescale-imx8mm-verdin-Fix-GPU-speed.patch \
+    file://0001-pmdomain-imx8m-blk-ctrl-fix-suspend-resume-order.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.48"
