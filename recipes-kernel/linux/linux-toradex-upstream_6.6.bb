@@ -28,8 +28,6 @@ TDX_PATCHES = " \
     file://0004-arm64-dts-freescale-imx8mm-verdin-dahlia-support-.patch \
     file://0001-arm64-dts-ti-k3-am62-verdin-replace-sleep-moci-ho.patch \
     file://0002-arm64-dts-ti-k3-am62-verdin-dahlia-support-sleep-.patch \
-    file://0001-can-mcp251xfd-properly-indent-labels.patch \
-    file://0001-can-mcp251xfd-move-mcp251xfd_timestamp_start-stop-in.patch \
     file://0001-drm-etnaviv-don-t-disable-TS-on-MMUv2-core-when-movi.patch \
     file://0002-arm64-dts-imx8mm-Add-optional-overdrive-DTSI.patch \
     file://0003-arm64-dts-freescale-imx8mm-verdin-Fix-GPU-speed.patch \
@@ -38,8 +36,8 @@ TDX_PATCHES = " \
     file://0002-arm64-dts-freescale-imx8mm-verdin-Add-Ivy-carrier-bo.patch \
 "
 PV = "6.6"
-LINUX_VERSION ?= "6.6.48"
+LINUX_VERSION ?= "6.6.53"
 KBRANCH = "linux-6.6.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "c77dee530e77eae20220784b409381366a588ac4"
+SRCREV_machine = "4ad9fa5c30edc19acf05b2960dd686c29cbe75a2"
 SRCREV_machine:use-head-next = "${AUTOREV}"
