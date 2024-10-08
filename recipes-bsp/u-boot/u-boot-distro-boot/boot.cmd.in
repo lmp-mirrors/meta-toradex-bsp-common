@@ -68,7 +68,7 @@ fi
 
 # Set console baudrate only when required
 setexpr _res sub "," "_" ${console}
-if test ! $? -eq 0; then
+if test "${_res}" = "" -o "${_res}" = "${console}"; then
 	env set console "${console},${baudrate}"
 fi
 
