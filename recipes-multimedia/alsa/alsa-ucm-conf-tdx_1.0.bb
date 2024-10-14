@@ -10,7 +10,7 @@ S = "${UNPACKDIR}"
 
 do_install () {
         install -d "${D}${datadir}/alsa"
-        cp -r "${WORKDIR}/ucm2" "${D}${datadir}/alsa"
+        cp -r "${UNPACKDIR}/ucm2" "${D}${datadir}/alsa"
 }
 
 FILES:${PN} = "${datadir}"
