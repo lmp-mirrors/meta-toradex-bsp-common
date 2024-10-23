@@ -11,4 +11,5 @@ TDX_PATCHES = "\
     file://0006-ARM-imx-verdin-imx8mm-Set-CAN-oscillator-frequency-b.patch \
     file://0001-configs-verdin-imx8m-mp-set-CONFIG_SPL_LOAD_FIT_ADDR.patch \
     file://0001-arm-imx-imx8m-soc-Fix-VPU-fdt-disable-fixup.patch \
+    file://0001-verdin-imx8m-m-p-defconfig-update-fastboot-buffer-si.patch \
 "
