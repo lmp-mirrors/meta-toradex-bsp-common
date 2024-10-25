@@ -37,6 +37,11 @@ TDX_PATCHES = " \
     file://0001-ARM-dts-imx6qdl-apalis-Update-audio-card-name.patch \
     file://0002-ARM-dts-imx6qdl-colibri-Update-audio-card-name.patch \
     file://0003-ARM-dts-imx7-colibri-Update-audio-card-name.patch \
+    file://0001-i2c-imx-do-not-poll-for-bus-busy-in-single-master-mo.patch \
+    file://0002-i2c-imx-separate-atomic-dma-and-non-dma-use-case.patch \
+    file://0003-i2c-imx-prevent-rescheduling-in-non-dma-mode.patch \
+    file://0004-arm64-dts-imx8mm-verdin-add-single-master-property-t.patch \
+    file://0005-arm64-dts-imx8mp-verdin-add-single-master-property-t.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.53"
