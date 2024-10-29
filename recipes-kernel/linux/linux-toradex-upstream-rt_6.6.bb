@@ -1,4 +1,4 @@
-LINUX_VERSION ?= "6.6.52-rt43"
+LINUX_VERSION ?= "6.6.58-rt45"
 require recipes-kernel/linux/linux-toradex-upstream_6.6.bb
 
 SUMMARY = "Toradex mainline real-time Linux kernel"

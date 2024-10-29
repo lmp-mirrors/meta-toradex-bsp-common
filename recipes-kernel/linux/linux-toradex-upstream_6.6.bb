@@ -44,7 +44,7 @@ TDX_PATCHES = " \
     file://0005-arm64-dts-imx8mp-verdin-add-single-master-property-t.patch \
 "
 PV = "6.6"
-LINUX_VERSION ?= "6.6.53"
+LINUX_VERSION ?= "6.6.59"
 KBRANCH = "linux-6.6.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
 SRCREV_machine = "bf3af7e92bda9f48085b7741e657eeb387a61644"
