@@ -42,6 +42,7 @@ TDX_PATCHES = " \
     file://0003-i2c-imx-prevent-rescheduling-in-non-dma-mode.patch \
     file://0004-arm64-dts-imx8mm-verdin-add-single-master-property-t.patch \
     file://0005-arm64-dts-imx8mp-verdin-add-single-master-property-t.patch \
+    file://0001-PCI-imx6-Add-suspend-resume-support-for-i.MX6QDL.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.59"
