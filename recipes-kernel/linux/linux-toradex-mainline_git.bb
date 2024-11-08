@@ -57,10 +57,10 @@ SRC_URI:append = " \
     file://0002-PCI-imx6-Add-suspend-resume-support-for-i.MX6QDL.patch \
 "
 
-LINUX_VERSION ?= "6.1.115"
+LINUX_VERSION ?= "6.1.123"
 KBRANCH = "linux-6.1.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "7c15117f9468c7395ce3fd0892a6f909b91d9005"
+SRCREV_machine = "7dc732d24ff75bae3740d2876b634c0158c79cad"
 SRCREV_machine:use-head-next = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
