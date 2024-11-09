@@ -18,8 +18,8 @@ TDX_PATCHES = " \
 "
 
 PV = "6.11"
-LINUX_VERSION ?= "6.11.6"
+LINUX_VERSION ?= "6.11.10"
 KBRANCH = "linux-6.11.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "163b38476c50d64b89c1dfdf4fd57a368b6ebbec"
+SRCREV_machine = "e7770f0e399b8b6ccf46283e7887a3baf2cc2ca8"
 SRCREV_machine:use-head-next = "${AUTOREV}"

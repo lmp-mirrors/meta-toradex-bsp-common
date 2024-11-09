@@ -45,8 +45,8 @@ TDX_PATCHES = " \
     file://0001-PCI-imx6-Add-suspend-resume-support-for-i.MX6QDL.patch \
 "
 PV = "6.6"
-LINUX_VERSION ?= "6.6.59"
+LINUX_VERSION ?= "6.6.63"
 KBRANCH = "linux-6.6.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "bf3af7e92bda9f48085b7741e657eeb387a61644"
+SRCREV_machine = "bff3e13adb72656356111d2549d8be7c872d6e15"
 SRCREV_machine:use-head-next = "${AUTOREV}"
