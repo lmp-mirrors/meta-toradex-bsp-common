@@ -13,6 +13,7 @@ TDX_PATCHES = " \
     file://0001-usb-gadget-f_ncm-Apply-workaround-for-packet-cloggin.patch \
     file://0001-arm64-dts-freescale-imx8mm-verdin-add-label-to-som-a.patch \
     file://0002-arm64-dts-freescale-imx8mm-verdin-Add-Ivy-carrier-bo.patch \
+    file://0001-kbuild-switch-from-lz4c-to-lz4-for-compression.patch \
 "
 # set PV manually, that way PREFERRED_VERSION can be set to a constant value
 PV = "mainline"
