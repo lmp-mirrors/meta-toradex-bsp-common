@@ -43,7 +43,6 @@ TDX_PATCHES = " \
     file://0004-arm64-dts-imx8mm-verdin-add-single-master-property-t.patch \
     file://0005-arm64-dts-imx8mp-verdin-add-single-master-property-t.patch \
     file://0001-PCI-imx6-Add-suspend-resume-support-for-i.MX6QDL.patch \
-    file://0001-kbuild-switch-from-lz4c-to-lz4-for-compression.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.59"
