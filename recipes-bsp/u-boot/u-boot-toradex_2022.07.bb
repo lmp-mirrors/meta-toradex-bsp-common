@@ -38,6 +38,7 @@ TDX_PATCHES = " \
     file://0001-crypto-fsl-allow-accessing-Job-Ring-from-non-TrustZo.patch \
     file://0002-configs-colibri-imx7-set-non-secure-boot-mode-as-def.patch \
     file://0003-configs-colibri-imx7-allow-accessing-job-rings-from-.patch \
+    file://0001-toradex-tdx-cfg-block-rework-modules-pid4-handling.patch \
 "
 SRC_URI:append = " ${TDX_PATCHES}"
 
