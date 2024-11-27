@@ -8,7 +8,7 @@ SRCREV_imx-firmware = "7e038c6afba3118bcee91608764ac3c633bce0c4"
 
 SRCREV_FORMAT = "default_imx-firmware"
 
-do_patch:append() {
+do_unpack:append() {
     src = oe.path.join(d.getVar("UNPACKDIR"), "/imx-firmware")
     dest = oe.path.join(d.getVar("S"), "/imx-firmware")
     oe.path.copyhardlinktree(src, dest)
