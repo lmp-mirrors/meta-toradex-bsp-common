@@ -1,10 +1,10 @@
 IMX_FIRMWARE_SRC ?= "git://github.com/NXP/imx-firmware.git;protocol=https"
-SRCBRANCH_imx-firmware = "lf-6.6.23_2.0.0"
+SRCBRANCH_imx-firmware = "lf-6.6.52_2.2.0"
 SRC_URI += " \
     ${IMX_FIRMWARE_SRC};branch=${SRCBRANCH_imx-firmware};destsuffix=${S}/imx-firmware;name=imx-firmware \
 "
 
-SRCREV_imx-firmware = "7e038c6afba3118bcee91608764ac3c633bce0c4"
+SRCREV_imx-firmware = "2978f3c88d6bcc5695a7b45f1936f18d31eebfa8"
 
 SRCREV_FORMAT = "default_imx-firmware"
 
@@ -35,7 +35,7 @@ LICENSE += " \
     & firmware-imx \
 "
 LIC_FILES_CHKSUM += " \
-    file://imx-firmware/LICENSE.txt;md5=10c0fda810c63b052409b15a5445671a \
+    file://imx-firmware/LICENSE.txt;md5=ca53281cc0caa7e320d4945a896fb837 \
 "
 NO_GENERIC_LICENSE[firmware-imx] = "imx-firmware/LICENSE.txt"
 
