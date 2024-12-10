@@ -46,8 +46,8 @@ TDX_PATCHES = " \
     file://0001-i2c-imx-fix-missing-stop-condition-in-single-master-.patch \
 "
 PV = "6.6"
-LINUX_VERSION ?= "6.6.63"
+LINUX_VERSION ?= "6.6.69"
 KBRANCH = "linux-6.6.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "bff3e13adb72656356111d2549d8be7c872d6e15"
+SRCREV_machine = "a30cd70ab75aa6b7ee880b6ec2ecc492faf205b2"
 SRCREV_machine:use-head-next = "${AUTOREV}"

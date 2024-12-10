@@ -28,7 +28,7 @@ SRC_URI = " \
 KCONFIG_REPO = "git://git.toradex.com/linux-toradex-kconfig.git"
 KMETA = "kernel-meta-toradex-bsp"
 
-SRCREV_meta-toradex-bsp = "e20ec7290fb752b3fac6164d52c7ecde064c2f01"
+SRCREV_meta-toradex-bsp = "c6957acbaaf98de436802c52cc9ca059959f08c1"
 SRCREV_meta-toradex-bsp:use-head-next = "${AUTOREV}"
 
 KERNEL_VERSION_SANITY_SKIP = "1"
