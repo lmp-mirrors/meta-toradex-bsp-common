@@ -47,8 +47,8 @@ TDX_PATCHES = " \
     file://0001-ARM-dts-imx6qdl-apalis-Fix-poweroff-on-Apalis-iMX.patch \
 "
 PV = "6.6"
-LINUX_VERSION ?= "6.6.69"
+LINUX_VERSION ?= "6.6.75"
 KBRANCH = "linux-6.6.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "a30cd70ab75aa6b7ee880b6ec2ecc492faf205b2"
+SRCREV_machine = "d51b7d37f14e76db7a1a13046ed87198c0407fcb"
 SRCREV_machine:use-head-next = "${AUTOREV}"

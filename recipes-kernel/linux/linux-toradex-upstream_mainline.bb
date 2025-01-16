@@ -14,6 +14,6 @@ TDX_PATCHES = " \
 "
 # set PV manually, that way PREFERRED_VERSION can be set to a constant value
 PV = "mainline"
-LINUX_VERSION = "6.13-rc"
+LINUX_VERSION = "6.14-rc"
 KBRANCH = "master"
 SRCREV_machine = "${AUTOREV}"
