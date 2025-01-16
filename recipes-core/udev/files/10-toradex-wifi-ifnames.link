@@ -1,5 +1,5 @@
 [Match]
-Driver=mwifiex_pcie mwifiex_sdio
+Driver=mwifiex_pcie mwifiex_sdio ath11k_pci
 
 [Link]
 NamePolicy=keep kernel
