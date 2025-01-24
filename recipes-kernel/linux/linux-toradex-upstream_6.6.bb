@@ -44,6 +44,7 @@ TDX_PATCHES = " \
     file://0005-arm64-dts-imx8mp-verdin-add-single-master-property-t.patch \
     file://0001-PCI-imx6-Add-suspend-resume-support-for-i.MX6QDL.patch \
     file://0001-i2c-imx-fix-missing-stop-condition-in-single-master-.patch \
+    file://0001-ARM-dts-imx6qdl-apalis-Fix-poweroff-on-Apalis-iMX.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.77"
