@@ -55,6 +55,7 @@ SRC_URI:append = " \
     file://0002-arm-dts-nxp-imx-Add-support-for-Apalis-Evaluation-Bo.patch \
     file://0001-PCI-imx6-Save-and-restore-root-port-MSI-control-in-s.patch \
     file://0002-PCI-imx6-Add-suspend-resume-support-for-i.MX6QDL.patch \
+    file://0001-ARM-dts-imx6qdl-apalis-Fix-poweroff-on-Apalis-iMX.patch \
 "
 
 LINUX_VERSION ?= "6.1.123"
