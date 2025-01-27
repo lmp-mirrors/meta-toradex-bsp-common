@@ -1,3 +1,7 @@
 KERNEL=="mmcblk[0-9]", ENV{DEVTYPE}=="disk", KERNELS=="30b60000.mmc", SYMLINK+="emmc"
 KERNEL=="mmcblk[0-9]boot[0-9]", ENV{DEVTYPE}=="disk", KERNELS=="30b60000.mmc", SYMLINK+="emmc-boot%n"
 KERNEL=="mmcblk[0-9]p[0-9]", ENV{DEVTYPE}=="partition", KERNELS=="30b60000.mmc", SYMLINK+="emmc-part%n"
+ACTION=="add|change", ATTRS{iomem_base}=="0x30860000", SYMLINK+="smarc-ser0"
+ACTION=="add|change", ATTRS{iomem_base}=="0x30A60000", SYMLINK+="smarc-ser1"
+ACTION=="add|change", ATTRS{iomem_base}=="0x30890000", SYMLINK+="smarc-ser2"
+ACTION=="add|change", ATTRS{iomem_base}=="0x30880000", SYMLINK+="smarc-ser3"
