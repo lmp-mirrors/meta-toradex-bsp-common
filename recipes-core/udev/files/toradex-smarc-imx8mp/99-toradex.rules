@@ -14,3 +14,5 @@ ACTION=="add|change", KERNEL=="i2c-[0-9]*", ATTRS{name}=="30ae0000.i2c", SYMLINK
 ACTION=="add|change", KERNEL=="i2c-[0-9]*", ATTRS{name}=="DesignWare HDMI", SYMLINK+="smarc-hdmi-ctrl"
 ACTION=="add|change", SUBSYSTEM=="spidev", KERNELS=="30820000.spi", SYMLINK+="smarc-spi0-cs%n"
 ACTION=="add|change", SUBSYSTEM=="spidev", KERNELS=="30830000.spi", SYMLINK+="smarc-spi1-cs%n"
+ACTION=="add|change", KERNEL=="mmcblk[0-9]", KERNELS=="30b50000.mmc", SYMLINK+="smarc-sdio"
+ACTION=="add|change", KERNEL=="mmcblk[0-9]p[0-9]*", KERNELS=="30b50000.mmc", SYMLINK+="smarc-sdio-part%n"
