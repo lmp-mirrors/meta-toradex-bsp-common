@@ -20,6 +20,10 @@ SRC_URI:append:toradex-smarc-imx8mp = " \
     file://10-toradex-can0-ifname.link \
     file://10-toradex-can1-ifname.link \
 "
+SRC_URI:append:toradex-smarc-imx95 = " \
+    file://10-toradex-can0-ifname.link \
+    file://10-toradex-can1-ifname.link \
+"
 SRC_URI:append:verdin-am62 = " \
     file://10-toradex-can0-ifname.link \
     file://10-toradex-can1-ifname.link \
