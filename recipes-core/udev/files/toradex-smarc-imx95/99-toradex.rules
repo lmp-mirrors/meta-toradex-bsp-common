@@ -10,3 +10,5 @@ ACTION=="add|change", KERNEL=="i2c-[0-9]*", ATTRS{name}=="42540000.i2c", SYMLINK
 ACTION=="add|change", KERNEL=="i2c-[0-9]*", ATTRS{name}=="426b0000.i2c", SYMLINK+="smarc-i2c-lcd"
 ACTION=="add|change", KERNEL=="i2c-[0-9]*", ATTRS{name}=="426d0000.i2c", SYMLINK+="smarc-i2c-cam1"
 ACTION=="add|change", KERNEL=="i2c-[0-9]*", ATTRS{name}=="44350000.i2c", SYMLINK+="smarc-i2c-gp"
+ACTION=="add|change", SUBSYSTEM=="spidev", KERNELS=="42700000.spi", SYMLINK+="smarc-spi0-cs%n"
+ACTION=="add|change", SUBSYSTEM=="spidev", KERNELS=="42560000.spi", SYMLINK+="smarc-spi1-cs%n"
