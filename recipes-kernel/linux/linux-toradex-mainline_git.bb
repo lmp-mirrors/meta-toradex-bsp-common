@@ -10,7 +10,7 @@ DEPENDS += "coreutils-native"
 # yaml and dtschema are required for 5.16+ device tree validation, libyaml is checked
 # via pkgconfig, so must always be present, but we can wrap the others to make them
 # conditional
-DEPENDS += "libyaml-native"
+DEPENDS += "libyaml-native lz4-native"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[dt-validation] = ",,python3-dtschema-native"
