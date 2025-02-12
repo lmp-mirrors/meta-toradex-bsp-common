@@ -2,14 +2,14 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://weston.sh"
 
-PACKAGECONFIG:append:upstream:tdx = " no-idle-timeout"
+PACKAGECONFIG:append:upstream:tdx-distro = " no-idle-timeout"
 PACKAGECONFIG:append:k3 = " no-idle-timeout"
 PACKAGECONFIG:append:upstream:colibri-imx6ull = " use-pixman"
 PACKAGECONFIG:append:upstream:colibri-imx6ull-emmc = " use-pixman"
 PACKAGECONFIG:append:upstream:colibri-imx7 = " use-pixman"
 PACKAGECONFIG:append:upstream:colibri-imx7-emmc = " use-pixman"
 
-do_install:append:tdx() {
+do_install:append:tdx-distro() {
     install -Dm0755 ${UNPACKDIR}/weston.sh ${D}${sysconfdir}/profile.d/weston.sh
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then

@@ -1,13 +1,13 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-PACKAGE_ARCH:tdx = "${MACHINE_ARCH}"
+PACKAGE_ARCH:tdx-distro = "${MACHINE_ARCH}"
 
-SRC_URI:append:tdx = " \
+SRC_URI:append:tdx-distro = " \
     file://g1.schema.in \
     file://setup-board.sh \
 "
 
-do_install:append:tdx() {
+do_install:append:tdx-distro() {
     sed -e "s:@@PRODUCT_NAME@@:${MACHINE}:" ${UNPACKDIR}/g1.schema.in > ${UNPACKDIR}/g1.schema
     sed -i "s:IMPORT_SCHEMAS=.*:IMPORT_SCHEMAS=\"g1\":" ${D}${sysconfdir}/default/usbgx
 

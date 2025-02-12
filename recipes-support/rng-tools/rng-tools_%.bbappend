@@ -1,1 +1,1 @@
-PACKAGECONFIG:remove:tdx = "libjitterentropy"
+PACKAGECONFIG:remove:tdx-distro = "libjitterentropy"
