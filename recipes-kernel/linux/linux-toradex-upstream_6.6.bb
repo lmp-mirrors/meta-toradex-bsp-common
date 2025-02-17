@@ -48,6 +48,7 @@ TDX_PATCHES = " \
     file://0001-usb-core-fix-pipe-creation-for-get_bMaxPacketSize.patch \
     file://0001-tpm_tis_spi-add-missing-attpm20p-SPI-device-ID-entry.patch \
     file://0001-arm64-dts-imx8mm-verdin-add-TPM-device.patch \
+    file://0001-arm64-dts-imx8mp-Fix-VPU-PGC-power-domain-parents.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.75"
