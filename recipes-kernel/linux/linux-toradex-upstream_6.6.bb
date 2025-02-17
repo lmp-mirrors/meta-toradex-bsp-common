@@ -43,11 +43,10 @@ TDX_PATCHES = " \
     file://0004-arm64-dts-imx8mm-verdin-add-single-master-property-t.patch \
     file://0005-arm64-dts-imx8mp-verdin-add-single-master-property-t.patch \
     file://0001-PCI-imx6-Add-suspend-resume-support-for-i.MX6QDL.patch \
-    file://0001-kbuild-switch-from-lz4c-to-lz4-for-compression.patch \
 "
 PV = "6.6"
-LINUX_VERSION ?= "6.6.53"
+LINUX_VERSION ?= "6.6.77"
 KBRANCH = "linux-6.6.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "4ad9fa5c30edc19acf05b2960dd686c29cbe75a2"
+SRCREV_machine = "c719455843a8bc3e969ba58ec92335ed7510e9fc"
 SRCREV_machine:use-head-next = "${AUTOREV}"

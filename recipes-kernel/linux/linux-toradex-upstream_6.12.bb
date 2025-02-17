@@ -14,13 +14,12 @@ TDX_PATCHES = " \
     file://0003-i2c-imx-prevent-rescheduling-in-non-dma-mode.patch \
     file://0004-arm64-dts-imx8mm-verdin-add-single-master-property-t.patch \
     file://0005-arm64-dts-imx8mp-verdin-add-single-master-property-t.patch \
-    file://0001-kbuild-switch-from-lz4c-to-lz4-for-compression.patch \
 "
 
 PV = "6.12"
-LINUX_VERSION ?= "6.12.4"
+LINUX_VERSION ?= "6.12.13"
 LINUX_KERNEL_TYPE:preempt-rt = "preempt-rt"
 KBRANCH = "linux-6.12.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "61baee2dc5341c936e7fa7b1ca33c5607868de69"
+SRCREV_machine = "4b07fe4a044d863926707e1106ff142427ec6e02"
 SRCREV_machine:use-head-next = "${AUTOREV}"
