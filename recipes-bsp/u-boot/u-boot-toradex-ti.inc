@@ -13,6 +13,7 @@ PLAT_SFX:am65xx = "am65xx"
 PLAT_SFX:am64xx = "am64xx"
 PLAT_SFX:am62xx = "am62xx"
 PLAT_SFX:am62axx = "am62axx"
+PLAT_SFX:am62pxx = "am62pxx"
 
 PACKAGECONFIG[atf] = "BL31=${STAGING_DIR_HOST}/firmware/bl31.bin,,trusted-firmware-a"
 PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/bl32.bin,,optee-os"
@@ -25,6 +26,7 @@ PACKAGECONFIG:append:j721s2 = " dm"
 PACKAGECONFIG:append:j784s4 = " dm"
 PACKAGECONFIG:append:am62xx = " dm"
 PACKAGECONFIG:append:am62axx = " dm"
+PACKAGECONFIG:append:am62pxx = " dm"
 
 BINMAN_INDIRS = "${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware"
 
@@ -34,7 +36,7 @@ do_deploy:append:k3r5 () {
     if [ -n "${UBOOT_CONFIG}" ]
     then
         for config in ${UBOOT_MACHINE}; do
-            if [ x${config} = "xverdin-am62_r5_usbdfu_defconfig" ]
+            if [ x${config} = "xverdin-am62_r5_usbdfu_defconfig" ] || [ x${config} = "xverdin-am62p_r5_usbdfu_defconfig" ]
             then
                 TARGETSUFFIX="-dfu"
             else
