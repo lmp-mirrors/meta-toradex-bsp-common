@@ -56,13 +56,12 @@ SRC_URI:append = " \
     file://0001-PCI-imx6-Save-and-restore-root-port-MSI-control-in-s.patch \
     file://0002-PCI-imx6-Add-suspend-resume-support-for-i.MX6QDL.patch \
     file://0001-ARM-dts-imx6qdl-apalis-Fix-poweroff-on-Apalis-iMX.patch \
-    file://0001-usb-core-fix-pipe-creation-for-get_bMaxPacketSize.patch \
 "
 
-LINUX_VERSION ?= "6.1.123"
+LINUX_VERSION ?= "6.1.129"
 KBRANCH = "linux-6.1.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "7dc732d24ff75bae3740d2876b634c0158c79cad"
+SRCREV_machine = "3a83585836269d5109d84a49d4e5b484e54cc6d1"
 SRCREV_machine:use-head-next = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
