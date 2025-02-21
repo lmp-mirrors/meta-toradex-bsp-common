@@ -17,6 +17,9 @@ TDX_PATCHES = " \
     file://0001-i2c-imx-fix-missing-stop-condition-in-single-master-.patch \
     file://0001-ARM-dts-imx6qdl-apalis-Fix-poweroff-on-Apalis-iMX.patch \
     file://0001-arm64-dts-imx8mp-Fix-VPU-PGC-power-domain-parents.patch \
+    file://0001-arm64-dts-freescale-imx8mp-verdin-dahlia-add-Microph.patch \
+    file://0001-arm64-dts-ti-k3-am62-verdin-dahlia-add-Microphone-Ja.patch \
+    file://0002-arm64-dts-freescale-imx8mm-verdin-dahlia-add-Microph.patch \
 "
 
 PV = "6.12"
