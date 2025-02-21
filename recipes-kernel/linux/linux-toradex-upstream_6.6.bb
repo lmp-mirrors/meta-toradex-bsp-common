@@ -49,6 +49,9 @@ TDX_PATCHES = " \
     file://0001-tpm_tis_spi-add-missing-attpm20p-SPI-device-ID-entry.patch \
     file://0001-arm64-dts-imx8mm-verdin-add-TPM-device.patch \
     file://0001-arm64-dts-imx8mp-Fix-VPU-PGC-power-domain-parents.patch \
+    file://0001-arm64-dts-freescale-imx8mp-verdin-dahlia-add-Microph.patch \
+    file://0001-arm64-dts-ti-k3-am62-verdin-dahlia-add-Microphone-Ja.patch \
+    file://0002-arm64-dts-freescale-imx8mm-verdin-dahlia-add-Microph.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.75"
