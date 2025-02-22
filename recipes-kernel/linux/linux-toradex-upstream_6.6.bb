@@ -45,7 +45,6 @@ TDX_PATCHES = " \
     file://0001-PCI-imx6-Add-suspend-resume-support-for-i.MX6QDL.patch \
     file://0001-i2c-imx-fix-missing-stop-condition-in-single-master-.patch \
     file://0001-ARM-dts-imx6qdl-apalis-Fix-poweroff-on-Apalis-iMX.patch \
-    file://0001-usb-core-fix-pipe-creation-for-get_bMaxPacketSize.patch \
     file://0001-tpm_tis_spi-add-missing-attpm20p-SPI-device-ID-entry.patch \
     file://0001-arm64-dts-imx8mm-verdin-add-TPM-device.patch \
     file://0001-arm64-dts-imx8mp-Fix-VPU-PGC-power-domain-parents.patch \
@@ -54,8 +53,8 @@ TDX_PATCHES = " \
     file://0002-arm64-dts-freescale-imx8mm-verdin-dahlia-add-Microph.patch \
 "
 PV = "6.6"
-LINUX_VERSION ?= "6.6.75"
+LINUX_VERSION ?= "6.6.79"
 KBRANCH = "linux-6.6.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "d51b7d37f14e76db7a1a13046ed87198c0407fcb"
+SRCREV_machine = "c0249d3a0c3cf082d56f4285647ddba19ef604a7"
 SRCREV_machine:use-head-next = "${AUTOREV}"
