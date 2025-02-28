@@ -53,8 +53,8 @@ TDX_PATCHES = " \
     file://0002-arm64-dts-freescale-imx8mm-verdin-dahlia-add-Microph.patch \
 "
 PV = "6.6"
-LINUX_VERSION ?= "6.6.79"
+LINUX_VERSION ?= "6.6.80"
 KBRANCH = "linux-6.6.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "c0249d3a0c3cf082d56f4285647ddba19ef604a7"
+SRCREV_machine = "568e253c3e3bdfecf5a4d65ccc8fc971c6c4b31f"
 SRCREV_machine:use-head-next = "${AUTOREV}"
