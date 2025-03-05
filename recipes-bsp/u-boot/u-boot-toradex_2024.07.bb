@@ -14,4 +14,5 @@ TDX_PATCHES = "\
     file://0001-arm-imx-imx8m-soc-Fix-VPU-fdt-disable-fixup.patch \
     file://0001-verdin-imx8m-m-p-defconfig-update-fastboot-buffer-si.patch \
     file://0001-verdin-imx8m-mp-Increase-SD-regulator-startup-delay.patch \
+    file://0001-board-toradex-add-SMARC-iMX8M-Plus.patch \
 "
