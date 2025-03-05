@@ -15,4 +15,5 @@ TDX_PATCHES = "\
     file://0001-verdin-imx8m-m-p-defconfig-update-fastboot-buffer-si.patch \
     file://0001-verdin-imx8m-mp-Increase-SD-regulator-startup-delay.patch \
     file://0001-scripts-dtc-pylibfdt-libfdt.i_shipped-Use-SWIG_Appen.patch \
+    file://0001-board-toradex-add-SMARC-iMX8M-Plus.patch \
 "
