@@ -56,6 +56,8 @@ SRC_URI:append = " \
     file://0001-PCI-imx6-Save-and-restore-root-port-MSI-control-in-s.patch \
     file://0002-PCI-imx6-Add-suspend-resume-support-for-i.MX6QDL.patch \
     file://0001-ARM-dts-imx6qdl-apalis-Fix-poweroff-on-Apalis-iMX.patch \
+    file://0001-ARM-dts-apalis-colibri-imx6-Enable-STMPE811-TS.patch \
+    file://0002-ARM-dts-apalis-colibri-imx6-Add-support-for-v1.2.patch \
 "
 
 LINUX_VERSION ?= "6.1.129"
