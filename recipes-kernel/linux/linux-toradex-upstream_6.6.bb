@@ -51,6 +51,8 @@ TDX_PATCHES = " \
     file://0001-arm64-dts-freescale-imx8mp-verdin-dahlia-add-Microph.patch \
     file://0001-arm64-dts-ti-k3-am62-verdin-dahlia-add-Microphone-Ja.patch \
     file://0002-arm64-dts-freescale-imx8mm-verdin-dahlia-add-Microph.patch \
+    file://0001-ARM-dts-apalis-colibri-imx6-Enable-STMPE811-TS.patch \
+    file://0002-ARM-dts-apalis-colibri-imx6-Add-support-for-v1.2.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.77"
