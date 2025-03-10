@@ -28,6 +28,10 @@ SRC_URI:append:verdin-am62 = " \
     file://10-toradex-can0-ifname.link \
     file://10-toradex-can1-ifname.link \
 "
+SRC_URI:append:verdin-am62p = " \
+    file://10-toradex-can0-ifname.link \
+    file://10-toradex-can1-ifname.link \
+"
 SRC_URI:append:verdin-imx8mm = " \
     file://10-toradex-can0-ifname.link \
 "
