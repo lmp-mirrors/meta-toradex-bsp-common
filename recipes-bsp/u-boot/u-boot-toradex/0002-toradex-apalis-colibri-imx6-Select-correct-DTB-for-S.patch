@@ -1,0 +1,50 @@
+From d279ac6f580d4671204f41890bb4f40d51d13989 Mon Sep 17 00:00:00 2001
+From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+Date: Thu, 27 Feb 2025 11:05:01 +0100
+Subject: [PATCH 2/2] toradex: apalis/colibri imx6: Select correct DTB for SoM
+ v1.2+
+
+When "fdtfile" is not set, use the "variant" environment variable to
+select the correct DTB.
+
+Apalis/Colibri iMX6 V1.2 replaced the STMPE811 ADC/Touch controller
+which is EOL with the TLA2024 ADC and AD7879 touch controller. They thus
+require a different DTB, which we can easily select with the variant env
+variable.
+
+Upstream-Status: Submitted [https://lore.kernel.org/u-boot/20250307103454.32661-3-ernest.vanhoecke@toradex.com/]
+Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+---
+ configs/apalis_imx6_defconfig  | 2 +-
+ configs/colibri_imx6_defconfig | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configs/apalis_imx6_defconfig b/configs/apalis_imx6_defconfig
+index 6d9bdd7a95db..7b28c206920f 100644
+--- a/configs/apalis_imx6_defconfig
++++ b/configs/apalis_imx6_defconfig
+@@ -31,7 +31,7 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_BOOTCOMMAND="run distro_bootcmd; usb start; setenv stdout serial,vidconsole; setenv stdin serial,usbkbd"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6q-apalis-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6q-apalis${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+diff --git a/configs/colibri_imx6_defconfig b/configs/colibri_imx6_defconfig
+index e040636e9506..02edb11b04fc 100644
+--- a/configs/colibri_imx6_defconfig
++++ b/configs/colibri_imx6_defconfig
+@@ -30,7 +30,7 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_BOOTCOMMAND="run distro_bootcmd; usb start; setenv stdout serial,vidconsole; setenv stdin serial,usbkbd"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6dl-colibri-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6dl-colibri${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-- 
+2.43.0
+

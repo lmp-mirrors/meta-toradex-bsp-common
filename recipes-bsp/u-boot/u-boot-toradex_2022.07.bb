@@ -39,6 +39,8 @@ TDX_PATCHES = " \
     file://0002-configs-colibri-imx7-set-non-secure-boot-mode-as-def.patch \
     file://0003-configs-colibri-imx7-allow-accessing-job-rings-from-.patch \
     file://0001-toradex-tdx-cfg-block-rework-modules-pid4-handling.patch \
+    file://0001-board-toradex-apalis-colibri-imx6-Detect-new-v1.2-So.patch \
+    file://0002-toradex-apalis-colibri-imx6-Select-correct-DTB-for-S.patch \
 "
 SRC_URI:append = " ${TDX_PATCHES}"
 
