@@ -15,4 +15,6 @@ TDX_PATCHES = "\
     file://0001-verdin-imx8m-m-p-defconfig-update-fastboot-buffer-si.patch \
     file://0001-verdin-imx8m-mp-Increase-SD-regulator-startup-delay.patch \
     file://0001-board-toradex-add-SMARC-iMX8M-Plus.patch \
+    file://0001-board-toradex-apalis-colibri-imx6-Detect-new-v1.2-So.patch \
+    file://0002-toradex-apalis-colibri-imx6-Select-correct-DTB-for-S.patch \
 "
