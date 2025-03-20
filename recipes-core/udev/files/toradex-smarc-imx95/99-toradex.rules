@@ -3,7 +3,7 @@ KERNEL=="mmcblk[0-9]boot[0-9]", ENV{DEVTYPE}=="disk", KERNELS=="42850000.mmc", S
 KERNEL=="mmcblk[0-9]p[0-9]", ENV{DEVTYPE}=="partition", KERNELS=="42850000.mmc", SYMLINK+="emmc-part%n"
 ACTION=="add|change", ATTRS{iomem_base}=="0x44390010", SYMLINK+="smarc-ser0"
 ACTION=="add|change", ATTRS{iomem_base}=="0x44380010", SYMLINK+="smarc-ser1"
-ACTION=="add|change", ATTRS{iomem_base}=="0x425a0010", SYMLINK+="smarc-ser2"
+ACTION=="add|change", ATTRS{iomem_base}=="0x425A0010", SYMLINK+="smarc-ser2"
 ACTION=="add|change", ATTRS{iomem_base}=="0x42570010", SYMLINK+="smarc-ser3"
 ACTION=="add|change", KERNEL=="i2c-[0-9]*", ATTR{name}=="42530000.i2c", SYMLINK+="smarc-i2c-pm"
 ACTION=="add|change", KERNEL=="i2c-[0-9]*", ATTR{name}=="42540000.i2c", SYMLINK+="smarc-i2c-cam0"
