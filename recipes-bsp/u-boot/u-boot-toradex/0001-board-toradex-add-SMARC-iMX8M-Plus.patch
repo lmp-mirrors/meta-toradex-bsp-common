@@ -1,4 +1,4 @@
-From 33d2d2e1fa95f1fd8402b6f2a424659a3acfff0f Mon Sep 17 00:00:00 2001
+From 40e5b56d84313e57ca299222e21c21ab5493dffe Mon Sep 17 00:00:00 2001
 From: Vitor Soares <vitor.soares@toradex.com>
 Date: Thu, 28 Nov 2024 23:38:14 +0000
 Subject: [PATCH] board: toradex: add SMARC iMX8M Plus
@@ -21,7 +21,7 @@ Verified:
 Upstream-Status: Pending
 Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
 ---
- .../dts/imx8mp-toradex-smarc-dev-u-boot.dtsi  |   58 +
+ .../dts/imx8mp-toradex-smarc-dev-u-boot.dtsi  |   80 +
  arch/arm/dts/imx8mp-toradex-smarc-dev.dts     |  251 +++
  arch/arm/dts/imx8mp-toradex-smarc.dtsi        | 1274 +++++++++++
  arch/arm/mach-imx/imx8m/Kconfig               |    7 +
@@ -33,14 +33,14 @@ Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
  board/toradex/smarc-imx8mp/imximage.cfg       |    6 +
  board/toradex/smarc-imx8mp/lpddr4_timing.c    | 1903 +++++++++++++++++
  board/toradex/smarc-imx8mp/lpddr4_timing.h    |    9 +
- board/toradex/smarc-imx8mp/smarc-imx8mp.c     |   32 +
+ board/toradex/smarc-imx8mp/smarc-imx8mp.c     |   85 +
  board/toradex/smarc-imx8mp/smarc-imx8mp.env   |   20 +
  board/toradex/smarc-imx8mp/spl.c              |  130 ++
  configs/toradex-smarc-imx8mp_defconfig        |  184 ++
  doc/board/toradex/index.rst                   |    1 +
  doc/board/toradex/smarc-imx8mp.rst            |  116 +
  include/configs/toradex-smarc-imx8mp.h        |   28 +
- 19 files changed, 4091 insertions(+)
+ 19 files changed, 4166 insertions(+)
  create mode 100644 arch/arm/dts/imx8mp-toradex-smarc-dev-u-boot.dtsi
  create mode 100644 arch/arm/dts/imx8mp-toradex-smarc-dev.dts
  create mode 100644 arch/arm/dts/imx8mp-toradex-smarc.dtsi
@@ -59,10 +59,10 @@ Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
 
 diff --git a/arch/arm/dts/imx8mp-toradex-smarc-dev-u-boot.dtsi b/arch/arm/dts/imx8mp-toradex-smarc-dev-u-boot.dtsi
 new file mode 100644
-index 000000000000..e107a4967265
+index 000000000000..42d390e0eb71
 --- /dev/null
 +++ b/arch/arm/dts/imx8mp-toradex-smarc-dev-u-boot.dtsi
-@@ -0,0 +1,58 @@
+@@ -0,0 +1,80 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 +/* Copyright (C) 2024 Toradex */
 +
@@ -71,6 +71,24 @@ index 000000000000..e107a4967265
 +/ {
 +	sysinfo {
 +		compatible = "toradex,sysinfo";
++	};
++};
++
++&gpio2 {
++	bt_uart_gpio {
++		gpio-hog;
++		gpios = <9 GPIO_ACTIVE_HIGH>;
++		input;
++		line-name = "BT_UART_RXD_GPIO";
++	};
++};
++
++&gpio3 {
++	wifi_en_gpio {
++		gpio-hog;
++		gpios = <14 GPIO_ACTIVE_HIGH>;
++		output-high;
++		line-name = "CTRL_EN_WIFI";
 +	};
 +};
 +
@@ -108,6 +126,10 @@ index 000000000000..e107a4967265
 +
 +&pinctrl_uart4 {
 +	bootph-pre-ram;
++};
++
++&uart3 {
++	status = "disabled";
 +};
 +
 +&uart4 {
@@ -3733,15 +3755,16 @@ index 000000000000..f61789c9a439
 +#endif /* __LPDDR4_TIMING_H__ */
 diff --git a/board/toradex/smarc-imx8mp/smarc-imx8mp.c b/board/toradex/smarc-imx8mp/smarc-imx8mp.c
 new file mode 100644
-index 000000000000..4a4d36c12d5e
+index 000000000000..bbe371516cc6
 --- /dev/null
 +++ b/board/toradex/smarc-imx8mp/smarc-imx8mp.c
-@@ -0,0 +1,32 @@
+@@ -0,0 +1,85 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/* Copyright (C) 2024 Toradex */
 +
 +#include <init.h>
 +#include <asm/global_data.h>
++#include <asm-generic/gpio.h>
 +#include <linux/errno.h>
 +
 +#include "../common/tdx-cfg-block.h"
@@ -3764,8 +3787,60 @@ index 000000000000..4a4d36c12d5e
 +}
 +
 +#if IS_ENABLED(CONFIG_OF_LIBFDT) && IS_ENABLED(CONFIG_OF_BOARD_SETUP)
++static bool board_has_wifi(void)
++{
++	struct gpio_desc *desc;
++
++	if (!gpio_hog_lookup_name("BT_UART_RXD_GPIO", &desc))
++		return !!dm_gpio_get_value(desc);
++
++	return true;
++}
++
++/*
++ * Module variants with a Wi-Fi/Bluetooth module use UART3 for Bluetooth,
++ * those without use UART3 as the SMARC SER3 UART.
++ * Test for a Wi-Fi module and if none found reassign UART3 interface to
++ * the SMARC SER3 pins.
++ */
++static void ft_board_assign_uart(void *blob)
++{
++	const char *uart_path = "/soc@0/bus@30800000/spba-bus@30800000/serial@30880000";
++	const char *pinctrl_path = "/soc@0/bus@30000000/pinctrl@30330000/uart3grp";
++	int pinctrl_offset;
++	int uart_offset;
++	int bt_offset;
++	u32 phandle;
++
++	if (board_has_wifi())
++		return;
++
++	uart_offset = fdt_path_offset(blob, uart_path);
++	if (uart_offset < 0)
++		return;
++
++	fdt_delprop(blob, uart_offset, "uart-has-rtscts");
++	bt_offset = fdt_subnode_offset(blob, uart_offset, "bluetooth");
++	if (bt_offset < 0)
++		return;
++
++	fdt_del_node(blob, bt_offset);
++
++	pinctrl_offset = fdt_path_offset(blob, pinctrl_path);
++	if (pinctrl_offset < 0)
++		return;
++
++	phandle = fdt_get_phandle(blob, pinctrl_offset);
++	if (phandle < 0)
++		return;
++
++	fdt_setprop_u32(blob, uart_offset, "pinctrl-0", phandle);
++}
++
 +int ft_board_setup(void *blob, struct bd_info *bd)
 +{
++	ft_board_assign_uart(blob);
++
 +	return ft_common_board_setup(blob, bd);
 +}
 +#endif
