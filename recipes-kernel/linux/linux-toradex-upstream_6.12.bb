@@ -15,17 +15,14 @@ TDX_PATCHES = " \
     file://0004-arm64-dts-imx8mm-verdin-add-single-master-property-t.patch \
     file://0005-arm64-dts-imx8mp-verdin-add-single-master-property-t.patch \
     file://0001-i2c-imx-fix-missing-stop-condition-in-single-master-.patch \
-    file://0001-ARM-dts-imx6qdl-apalis-Fix-poweroff-on-Apalis-iMX.patch \
     file://0001-arm64-dts-imx8mp-Fix-VPU-PGC-power-domain-parents.patch \
-    file://0001-arm64-dts-freescale-imx8mp-verdin-dahlia-add-Microph.patch \
     file://0001-arm64-dts-ti-k3-am62-verdin-dahlia-add-Microphone-Ja.patch \
-    file://0002-arm64-dts-freescale-imx8mm-verdin-dahlia-add-Microph.patch \
 "
 
 PV = "6.12"
-LINUX_VERSION ?= "6.12.17"
+LINUX_VERSION ?= "6.12.21"
 LINUX_KERNEL_TYPE:preempt-rt = "preempt-rt"
 KBRANCH = "linux-6.12.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "41b222412985dc8410b88fb7a0fda87e6640d4df"
+SRCREV_machine = "3423cae6907838f760aada1a72bb6e378ebaa16d"
 SRCREV_machine:use-head-next = "${AUTOREV}"
