@@ -62,6 +62,9 @@ do_install () {
     if [ -f ${S}/10-toradex-can3-ifname.link ]; then
         install -m 0644 ${S}/10-toradex-can3-ifname.link ${D}${sysconfdir}/systemd/network/
     fi
+    if [ -f ${WORKDIR}/99-toradex-fan-pwm.rules ]; then
+        install -m 0644 ${WORKDIR}/99-toradex-fan-pwm.rules ${D}${sysconfdir}/systemd/network/
+    fi
     install -m 0644 ${S}/10-toradex-wifi-ifnames.link ${D}${sysconfdir}/systemd/network/
     install -m 0644 ${S}/99-toradex.rules ${D}${sysconfdir}/udev/rules.d/
     install -m 0644 ${S}/bootpart-automount.rules ${D}${sysconfdir}/udev/rules.d/
