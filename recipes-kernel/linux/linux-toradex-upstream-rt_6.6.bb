@@ -1,4 +1,4 @@
-LINUX_VERSION ?= "6.6.84-rt52"
+LINUX_VERSION ?= "6.6.87-rt54"
 require recipes-kernel/linux/linux-toradex-upstream_6.6.bb
 
 SUMMARY = "Toradex mainline real-time Linux kernel"
@@ -10,8 +10,8 @@ LINUX_REPO = "git://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.g
 # set PV manually, that way PREFERRED_VERSION can be set to a constant value
 PV = "6.6"
 KBRANCH = "v6.6-rt"
-SRCREV_meta-toradex-bsp = "d3a82636b1e3c54d9e162e32b1344040e25f0607"
-SRCREV_machine = "025ecd0d058156e3ea73b0862c23258bb9cc9149"
+SRCREV_meta-toradex-bsp = "10a778031a96794e81084e4df6c498496c2bfba4"
+SRCREV_machine = "a4080334e237c0ecb0ac4b3ecdc5ec2d8d6dbe31"
 SRCREV_machine:use-head-next = "${AUTOREV}"
 
 LINUX_KERNEL_TYPE = "preempt-rt"

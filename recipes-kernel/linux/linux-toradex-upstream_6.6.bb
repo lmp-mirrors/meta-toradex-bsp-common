@@ -52,8 +52,8 @@ TDX_PATCHES = " \
     file://0002-ARM-dts-apalis-colibri-imx6-Add-support-for-v1.2.patch \
 "
 PV = "6.6"
-LINUX_VERSION ?= "6.6.85"
+LINUX_VERSION ?= "6.6.88"
 KBRANCH = "linux-6.6.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "d57a7c6169607dd09157ccf257e556fb75444f28"
+SRCREV_machine = "23ec0b4057294d86cdefafe373b1f03568f75aff"
 SRCREV_machine:use-head-next = "${AUTOREV}"

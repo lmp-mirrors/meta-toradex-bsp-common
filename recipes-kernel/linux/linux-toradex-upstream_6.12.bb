@@ -20,9 +20,9 @@ TDX_PATCHES = " \
 "
 
 PV = "6.12"
-LINUX_VERSION ?= "6.12.21"
+LINUX_VERSION ?= "6.12.25"
 LINUX_KERNEL_TYPE:preempt-rt = "preempt-rt"
 KBRANCH = "linux-6.12.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "3423cae6907838f760aada1a72bb6e378ebaa16d"
+SRCREV_machine = "ef4999852d307d38cfdecd91ed6892cc03beb9b8"
 SRCREV_machine:use-head-next = "${AUTOREV}"
