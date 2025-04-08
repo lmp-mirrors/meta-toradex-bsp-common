@@ -55,15 +55,14 @@ SRC_URI:append = " \
     file://0002-arm-dts-nxp-imx-Add-support-for-Apalis-Evaluation-Bo.patch \
     file://0001-PCI-imx6-Save-and-restore-root-port-MSI-control-in-s.patch \
     file://0002-PCI-imx6-Add-suspend-resume-support-for-i.MX6QDL.patch \
-    file://0001-ARM-dts-imx6qdl-apalis-Fix-poweroff-on-Apalis-iMX.patch \
     file://0001-ARM-dts-apalis-colibri-imx6-Enable-STMPE811-TS.patch \
     file://0002-ARM-dts-apalis-colibri-imx6-Add-support-for-v1.2.patch \
 "
 
-LINUX_VERSION ?= "6.1.132"
+LINUX_VERSION ?= "6.1.133"
 KBRANCH = "linux-6.1.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "8e60a714ba3bb083b7321385054fa39ceb876914"
+SRCREV_machine = "3dfebb87d7ebd9db03d6aabb42b8bc1589d13ae2"
 SRCREV_machine:use-head-next = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
