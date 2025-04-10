@@ -1,7 +1,7 @@
 inherit toradex-devicetree
 
 SRCBRANCH = "master"
-SRCREV = "0ec31322ea847f549b9189da3d75784f7cfc0238"
+SRCREV = "3946ce4f19c955077ab9edc96004808177901a22"
 SRCREV:use-head-next = "${AUTOREV}"
 
 COMPATIBLE_MACHINE = ".*(mx[678]).*"
