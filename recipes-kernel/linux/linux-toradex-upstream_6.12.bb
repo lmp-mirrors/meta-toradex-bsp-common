@@ -17,6 +17,13 @@ TDX_PATCHES = " \
     file://0001-i2c-imx-fix-missing-stop-condition-in-single-master-.patch \
     file://0001-arm64-dts-imx8mp-Fix-VPU-PGC-power-domain-parents.patch \
     file://0001-arm64-dts-ti-k3-am62-verdin-dahlia-add-Microphone-Ja.patch \
+    file://0001-dt-bindings-arm-freescale-Add-verdin-imx8mp-ivy-boar.patch \
+    file://0002-arm64-dts-freescale-imx8mp-verdin-add-labels-to-som-.patch \
+    file://0003-arm64-dts-freescale-imx8mp-verdin-Add-Ivy-carrier-bo.patch \
+    file://0004-arm64-dts-ti-k3-am62-verdin-Fix-SoM-ADC-compatible.patch \
+    file://0005-dt-bindings-arm-ti-Add-verdin-am62-ivy-board.patch \
+    file://0006-arm64-dts-ti-k3-am62-verdin-add-label-to-som-adc-nod.patch \
+    file://0007-arm64-dts-ti-k3-am62-verdin-Add-Ivy-carrier-board.patch \
 "
 
 PV = "6.12"
