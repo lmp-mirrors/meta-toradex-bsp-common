@@ -17,4 +17,5 @@ TDX_PATCHES = "\
     file://0001-board-toradex-add-SMARC-iMX8M-Plus.patch \
     file://0001-board-toradex-apalis-colibri-imx6-Detect-new-v1.2-So.patch \
     file://0002-toradex-apalis-colibri-imx6-Select-correct-DTB-for-S.patch \
+    file://0001-toradex-tdx-cfg-block-add-pid-0098-0099-201-to-215-support.patch\
 "
