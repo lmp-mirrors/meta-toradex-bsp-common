@@ -23,6 +23,8 @@ SRC_URI = " \
 "
 MIRRORS += "git://source.denx.de/u-boot/u-boot.git git://github.com/u-boot/u-boot.git"
 
+CVE_PRODUCT = "denx:u-boot"
+
 inherit toradex-u-boot-localversion
 
 UBOOT_INITIAL_ENV = "u-boot-initial-env"
