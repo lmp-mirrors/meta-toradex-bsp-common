@@ -25,6 +25,7 @@ TDX_PATCHES = " \
     file://0006-arm64-dts-ti-k3-am62-verdin-add-label-to-som-adc-nod.patch \
     file://0007-arm64-dts-ti-k3-am62-verdin-Add-Ivy-carrier-board.patch \
     file://0001-i2c-imx-fix-emulated-smbus-block-read.patch \
+    file://0001-wifi-mwifiex-enable-host-mlme-on-sdio-W8997-chipsets.patch \
 "
 
 PV = "6.12"
