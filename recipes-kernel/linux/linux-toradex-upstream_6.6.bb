@@ -51,6 +51,16 @@ TDX_PATCHES = " \
     file://0001-ARM-dts-apalis-colibri-imx6-Enable-STMPE811-TS.patch \
     file://0002-ARM-dts-apalis-colibri-imx6-Add-support-for-v1.2.patch \
     file://0001-i2c-imx-fix-emulated-smbus-block-read.patch \
+    file://0001-wifi-mwifiex-increase-max_num_akm_suites.patch \
+    file://0002-wifi-mwifiex-add-host-mlme-for-client-mode.patch \
+    file://0003-wifi-mwifiex-add-host-mlme-for-AP-mode.patch \
+    file://0004-wifi-mwifiex-simplify-WPA-flags-setting.patch \
+    file://0005-wifi-mwifiex-fix-key_mgmt-setting.patch \
+    file://0006-wifi-mwifiex-add-support-for-WPA-PSK-SHA256.patch \
+    file://0007-wifi-mwifiex-keep-mwifiex_cfg80211_ops-constant.patch \
+    file://0008-wifi-mwifiex-Fix-uninitialized-variable-in-mwifiex_c.patch \
+    file://0009-wifi-mwifiex-add-missing-locking.patch \
+    file://0010-wifi-mwifiex-enable-host-mlme-on-sdio-W8997-chipsets.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.88"
