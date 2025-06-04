@@ -26,6 +26,14 @@ TDX_PATCHES = " \
     file://0007-arm64-dts-ti-k3-am62-verdin-Add-Ivy-carrier-board.patch \
     file://0001-i2c-imx-fix-emulated-smbus-block-read.patch \
     file://0001-wifi-mwifiex-enable-host-mlme-on-sdio-W8997-chipsets.patch \
+    file://0001-dt-bindings-arm-fsl-add-Toradex-SMARC-iMX8MP-SoM-and.patch \
+    file://0002-arm64-dts-freescale-add-Toradex-SMARC-iMX8MP.patch \
+    file://0003-dt-bindings-power-reset-add-toradex-smarc-ec.patch \
+    file://0004-power-reset-add-Toradex-Embedded-Controller.patch \
+    file://0005-arm64-dts-freescale-imx8mp-toradex-smarc-add-fan-PWM.patch \
+    file://0006-arm64-dts-freescale-imx8mp-toradex-smarc-add-embedde.patch \
+    file://0007-arm64-dts-freescale-imx8mp-toradex-smarc-add-gpio-ex.patch \
+    file://0008-arm64-dts-freescale-imx8mp-toradex-smarc-use-generic.patch \
 "
 
 PV = "6.12"
