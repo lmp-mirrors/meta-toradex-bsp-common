@@ -63,8 +63,8 @@ TDX_PATCHES = " \
     file://0010-wifi-mwifiex-enable-host-mlme-on-sdio-W8997-chipsets.patch \
 "
 PV = "6.6"
-LINUX_VERSION ?= "6.6.92"
+LINUX_VERSION ?= "6.6.95"
 KBRANCH = "linux-6.6.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "ffaf6178137b9cdcc9742d6677b70be164dfeb8c"
+SRCREV_machine = "3f5b4c104b7d3267d015daf9d9681c5fe3b01224"
 SRCREV_machine:use-head-next = "${AUTOREV}"
