@@ -1,1 +1,0 @@
-ACTION=="add", SUBSYSTEM=="hwmon", DRIVERS=="amc6821", ATTR{pwm1_enable}="1", ATTR{pwm1}="255"
