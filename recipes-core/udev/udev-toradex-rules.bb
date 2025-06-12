@@ -15,17 +15,14 @@ SRC_URI:append:aquila-am69 = " \
     file://10-toradex-can1-ifname.link \
     file://10-toradex-can2-ifname.link \
     file://10-toradex-can3-ifname.link \
-    file://99-toradex-fan-pwm.rules \
 "
 SRC_URI:append:toradex-smarc-imx8mp = " \
     file://10-toradex-can0-ifname.link \
     file://10-toradex-can1-ifname.link \
-    file://99-toradex-fan-pwm.rules \
 "
 SRC_URI:append:toradex-smarc-imx95 = " \
     file://10-toradex-can0-ifname.link \
     file://10-toradex-can1-ifname.link \
-    file://99-toradex-fan-pwm.rules \
 "
 SRC_URI:append:verdin-am62 = " \
     file://10-toradex-can0-ifname.link \
@@ -65,9 +62,6 @@ do_install () {
     fi
     if [ -f ${S}/10-toradex-can3-ifname.link ]; then
         install -m 0644 ${S}/10-toradex-can3-ifname.link ${D}${sysconfdir}/systemd/network/
-    fi
-    if [ -f ${WORKDIR}/99-toradex-fan-pwm.rules ]; then
-        install -m 0644 ${WORKDIR}/99-toradex-fan-pwm.rules ${D}${sysconfdir}/udev/rules.d/
     fi
     install -m 0644 ${S}/10-toradex-wifi-ifnames.link ${D}${sysconfdir}/systemd/network/
     install -m 0644 ${S}/99-toradex.rules ${D}${sysconfdir}/udev/rules.d/
