@@ -18,10 +18,9 @@ DEPENDS += " \
 PROVIDES += "u-boot"
 
 SRC_URI = " \
-    git://source.denx.de/u-boot/u-boot.git;protocol=https;branch=master \
+    git://git.toradex.com/u-boot-toradex.git;protocol=https;branch=master \
     ${TDX_PATCHES} \
 "
-MIRRORS += "git://source.denx.de/u-boot/u-boot.git git://github.com/u-boot/u-boot.git"
 
 inherit toradex-u-boot-localversion
 
