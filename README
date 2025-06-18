@@ -20,16 +20,16 @@ Dependencies
 This layer depends on:
 
   URI: git://git.openembedded.org/bitbake
-  branch: master
+  branch: scarthgap
   revision: HEAD
 
   URI: git://git.openembedded.org/openembedded-core
   layers: meta
-  branch: master
+  branch: scarthgap
   revision: HEAD
 
   URI: git://git.toradex.com/meta-toradex-nxp
-  branch: master
+  branch: scarthgap-7.x.y
   revision: HEAD
 
 Patches
