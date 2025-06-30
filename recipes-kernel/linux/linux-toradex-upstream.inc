@@ -33,8 +33,6 @@ SRCREV_meta-toradex-bsp:use-head-next = "${AUTOREV}"
 
 KERNEL_VERSION_SANITY_SKIP = "1"
 
-S = "${WORKDIR}/git"
-
 KCONFIG_MODE = "--alldefconfig"
 
 # Load USB functions configurable through configfs (CONFIG_USB_CONFIGFS)
