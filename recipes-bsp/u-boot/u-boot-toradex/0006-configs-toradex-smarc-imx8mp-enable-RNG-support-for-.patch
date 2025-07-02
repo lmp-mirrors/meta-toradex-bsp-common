@@ -1,0 +1,29 @@
+From 6fe0203a068f9abc85b0a46c2300427170c43df8 Mon Sep 17 00:00:00 2001
+From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Date: Tue, 1 Jul 2025 13:18:43 +0200
+Subject: [PATCH 6/6] configs: toradex-smarc-imx8mp: enable RNG support for
+ KASLR
+
+Enable DM_RNG in U-Boot to automatically populate /chosen/kaslr-seed.
+
+Upstream-Status: Submitted [https://lore.kernel.org/all/20250701134504.1076115-4-ghidoliemanuele@gmail.com/]
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+---
+ configs/toradex-smarc-imx8mp_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/toradex-smarc-imx8mp_defconfig b/configs/toradex-smarc-imx8mp_defconfig
+index 7d44edaea81f..46a10fcb8a40 100644
+--- a/configs/toradex-smarc-imx8mp_defconfig
++++ b/configs/toradex-smarc-imx8mp_defconfig
+@@ -156,6 +156,7 @@ CONFIG_DM_REGULATOR_PCA9450=y
+ CONFIG_SPL_DM_REGULATOR_PCA9450=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_RNG=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
+ CONFIG_SYSRESET=y
+-- 
+2.43.0
+
