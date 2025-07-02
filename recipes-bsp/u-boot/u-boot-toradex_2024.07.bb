@@ -20,4 +20,10 @@ TDX_PATCHES = "\
     file://0002-toradex-apalis-colibri-imx6-Select-correct-DTB-for-S.patch \
     file://0001-toradex-tdx-cfg-block-add-pid-0098-0099-201-to-215-support.patch \
     file://0001-gpio-pca953x-support-pcal6408-and-pcal6416.patch \
+    file://0001-Add-fdt_kaslrseed-function-to-add-kaslr-seed-to-chos.patch \
+    file://0002-fdt-automatically-add-chosen-kaslr-seed-if-DM_RNG-is.patch \
+    file://0003-use-fdt_kaslrseed-function-to-de-duplicate-code.patch \
+    file://0004-configs-verdin-imx8mm-enable-RNG-support-for-KASLR.patch \
+    file://0005-configs-verdin-imx8mp-enable-RNG-support-for-KASLR.patch \
+    file://0006-configs-toradex-smarc-imx8mp-enable-RNG-support-for-.patch \
 "
