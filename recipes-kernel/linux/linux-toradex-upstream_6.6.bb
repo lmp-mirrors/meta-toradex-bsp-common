@@ -61,6 +61,7 @@ TDX_PATCHES = " \
     file://0008-wifi-mwifiex-Fix-uninitialized-variable-in-mwifiex_c.patch \
     file://0009-wifi-mwifiex-add-missing-locking.patch \
     file://0010-wifi-mwifiex-enable-host-mlme-on-sdio-W8997-chipsets.patch \
+    file://0001-wifi-mwifiex-discard-erroneous-disassoc-frames-on-ST.patch \
 "
 PV = "6.6"
 LINUX_VERSION ?= "6.6.85"
