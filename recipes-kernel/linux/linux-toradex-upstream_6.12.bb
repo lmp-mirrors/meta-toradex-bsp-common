@@ -34,6 +34,7 @@ TDX_PATCHES = " \
     file://0006-arm64-dts-freescale-imx8mp-toradex-smarc-add-embedde.patch \
     file://0007-arm64-dts-freescale-imx8mp-toradex-smarc-add-gpio-ex.patch \
     file://0008-arm64-dts-freescale-imx8mp-toradex-smarc-use-generic.patch \
+    file://0001-wifi-mwifiex-discard-erroneous-disassoc-frames-on-ST.patch \
 "
 
 PV = "6.12"
