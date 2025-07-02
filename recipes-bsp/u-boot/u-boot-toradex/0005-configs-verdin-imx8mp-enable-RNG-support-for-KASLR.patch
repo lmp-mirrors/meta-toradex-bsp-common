@@ -1,0 +1,28 @@
+From 34672dbae781bb2cbfe49f1e7295b30e87f7ef47 Mon Sep 17 00:00:00 2001
+From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Date: Tue, 1 Jul 2025 11:02:48 +0200
+Subject: [PATCH 5/6] configs: verdin-imx8mp: enable RNG support for KASLR
+
+Enable DM_RNG in U-Boot to automatically populate /chosen/kaslr-seed.
+
+Upstream-Status: Submitted [https://lore.kernel.org/all/20250701134504.1076115-3-ghidoliemanuele@gmail.com/]
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+---
+ configs/verdin-imx8mp_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/verdin-imx8mp_defconfig b/configs/verdin-imx8mp_defconfig
+index ded9e19bcca5..2a48d62aa992 100644
+--- a/configs/verdin-imx8mp_defconfig
++++ b/configs/verdin-imx8mp_defconfig
+@@ -162,6 +162,7 @@ CONFIG_POWER_PCA9450=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
+ CONFIG_SPL_POWER_I2C=y
++CONFIG_DM_RNG=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
+ CONFIG_SYSRESET=y
+-- 
+2.43.0
+

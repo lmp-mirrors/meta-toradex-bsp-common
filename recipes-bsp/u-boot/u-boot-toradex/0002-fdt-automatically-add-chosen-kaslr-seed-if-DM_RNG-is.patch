@@ -1,0 +1,69 @@
+From dbd78ef4d2ef240f40901d396e5ae8e5b1c750bd Mon Sep 17 00:00:00 2001
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Tue, 18 Jun 2024 14:06:07 -0700
+Subject: [PATCH 2/6] fdt: automatically add /chosen/kaslr-seed if DM_RNG is
+ enabled
+
+If RANDOMIZE_BASE is enabled in the Linux kernel instructing it to
+randomize the virtual address at which the kernel image is loaded, it
+expects entropy to be provided by the bootloader by populating
+/chosen/kaslr-seed with a 64-bit value from source of entropy at boot.
+
+If we have DM_RNG enabled populate this value automatically when
+fdt_chosen is called. We skip this if ARMV8_SEC_FIRMWARE_SUPPORT
+is enabled as its implementation uses a different source of entropy
+that is not yet implemented as DM_RNG. We also skip this if
+MEASURED_BOOT is enabled as in that case any modifications to the
+dt will cause measured boot to fail (although there are many other
+places the dt is altered).
+
+Note that the Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for
+randomization and completely ignores the kaslr-seed for its own
+randomness needs (i.e the randomization of the physical placement of
+the kernel). It gets weeded out from the DTB that gets handed over via
+efi_install_fdt() as it would also mess up the measured boot DTB TPM
+measurements as well.
+
+Upstream-Status: Backport [ea955eea4f66]
+Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Andy Yan <andy.yan@rock-chips.com>
+Cc: Akash Gajjar <gajjar04akash@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Devarsh Thakkar <devarsht@ti.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Chris Morgan <macromorgan@hotmail.com>
+---
+ boot/fdt_support.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index b1b2679dea0c..4559adcd5e2e 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -345,6 +345,15 @@ int fdt_chosen(void *fdt)
+ 	if (nodeoffset < 0)
+ 		return nodeoffset;
+ 
++	/* if DM_RNG enabled automatically inject kaslr-seed node unless:
++	 * CONFIG_MEASURED_BOOT enabled: as dt modifications break measured boot
++	 * CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT enabled: as that implementation does not use dm yet
++	 */
++	if (IS_ENABLED(CONFIG_DM_RNG) &&
++	    !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
++	    !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
++		fdt_kaslrseed(fdt, false);
++
+ 	if (IS_ENABLED(CONFIG_BOARD_RNG_SEED) && !board_rng_seed(&buf)) {
+ 		err = fdt_setprop(fdt, nodeoffset, "rng-seed",
+ 				  abuf_data(&buf), abuf_size(&buf));
+-- 
+2.43.0
+
