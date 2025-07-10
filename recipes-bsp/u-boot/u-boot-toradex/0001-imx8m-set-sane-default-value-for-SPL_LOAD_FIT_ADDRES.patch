@@ -1,0 +1,41 @@
+From 4f5c48d5fdab0fae189ae9d59a9266aceb261ecd Mon Sep 17 00:00:00 2001
+From: Rasmus Villemoes <ravi@prevas.dk>
+Date: Thu, 24 Oct 2024 12:01:45 +0200
+Subject: [PATCH] imx8m: set sane default value for SPL_LOAD_FIT_ADDRESS
+
+I enabled IMX_HAB on an imx8mp board, but even though I knew about the
+implementation, I forgot that I had to provide a sane value for
+SPL_LOAD_FIT_ADDRESS. The help text for IMX_HAB doesn't mention this
+implicit requirement, and there's no build-time warning; the default
+0x0 value just ends up being returned from
+board_spl_fit_buffer_addr(), obviously resulting in a non-booting
+board.
+
+The existing imx8m* board configs that set a non-zero value currently
+all use 0x44000000. The actual value doesn't matter too much, but 0 is
+always wrong for imx8m platforms. So just use 0x44000000 as default
+for those platforms.
+
+Upstream-Status: Backport [4f5c48d5fdab0fae189ae9d59a9266aceb261ecd]
+
+Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+Signed-off-by: Rogerio Guerra Borin <rogerio.borin@toradex.com>
+---
+ boot/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/boot/Kconfig b/boot/Kconfig
+index b168b6bbcc2..b9287c60685 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -233,6 +233,7 @@ config SPL_LOAD_FIT
+ config SPL_LOAD_FIT_ADDRESS
+ 	hex "load address of fit image"
+ 	depends on SPL_LOAD_FIT
++	default 0x44000000 if ARCH_IMX8M
+ 	default 0x0
+ 	help
+ 	  Specify the load address of the fit image that will be loaded
+-- 
+2.34.1
+
