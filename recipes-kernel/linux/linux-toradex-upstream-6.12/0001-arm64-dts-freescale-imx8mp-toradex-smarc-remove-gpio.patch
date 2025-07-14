@@ -1,0 +1,39 @@
+From f2eb236193899be87b0484b9cede396a3e63e9f0 Mon Sep 17 00:00:00 2001
+From: Max Krummenacher <max.krummenacher@toradex.com>
+Date: Mon, 7 Jul 2025 10:04:07 +0200
+Subject: [PATCH] arm64: dts: freescale: imx8mp-toradex-smarc: remove gpio hog
+
+Remove the gpio hog node which forces using DSI signals rather than
+the second LVDS channels signals.
+The dsi signals are not used in any of the current device trees.
+Leave that decision to the actual device tree which will also define
+the consumer of the signals.
+
+Upstream-Status: Submitted [https://lore.kernel.org/all/20250708135300.2855155-1-max.oss.09@gmail.com/]
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
+ arch/arm64/boot/dts/freescale/imx8mp-toradex-smarc.dtsi | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/imx8mp-toradex-smarc.dtsi b/arch/arm64/boot/dts/freescale/imx8mp-toradex-smarc.dtsi
+index cdecdefe5885..e3a5f3c5401b 100644
+--- a/arch/arm64/boot/dts/freescale/imx8mp-toradex-smarc.dtsi
++++ b/arch/arm64/boot/dts/freescale/imx8mp-toradex-smarc.dtsi
+@@ -375,14 +375,6 @@ &gpio3 {
+ 			  "",
+ 			  "",
+ 			  "SMARC_I2C_PM_CK";
+-
+-	lvds_dsi_mux_hog: lvds-dsi-mux-hog {
+-		gpio-hog;
+-		gpios = <7 GPIO_ACTIVE_HIGH>;
+-		line-name = "LVDS_DSI_SEL";
+-		/* LVDS_DSI_SEL as DSI */
+-		output-low;
+-	};
+ };
+ 
+ &gpio4 {
+-- 
+2.42.0
+
