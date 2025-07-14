@@ -1,0 +1,86 @@
+From 43b7ddbbc4c244e2b2ede49680b35849c3a14dea Mon Sep 17 00:00:00 2001
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 17 Jul 2024 09:31:00 +0100
+Subject: [PATCH] bootstd: Correct handling of script from network
+
+When reading a script from a network, no block device is available.
+Update the implementation to support this correctly, avoiding setting
+environment variables which relate only to block devices.
+
+Upstream-Status: Backport [60b180fdba1bf7bbd6181c1eef804a20fa485427]
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+ boot/bootmeth_script.c | 51 +++++++++++++++++++++++++-----------------
+ 1 file changed, 31 insertions(+), 20 deletions(-)
+
+diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
+index 06340e43d2d7..7aed893e3dd4 100644
+--- a/boot/bootmeth_script.c
++++ b/boot/bootmeth_script.c
+@@ -186,31 +186,42 @@ static int script_set_bootflow(struct udevice *dev, struct bootflow *bflow,
+ 
+ static int script_boot(struct udevice *dev, struct bootflow *bflow)
+ {
+-	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
++	struct blk_desc *desc;
+ 	ulong addr;
+ 	int ret = 0;
+ 
+-	if (desc->uclass_id == UCLASS_USB) {
+-		ret = env_set("devtype", "usb");
++	if (bflow->blk) {
++		desc = dev_get_uclass_plat(bflow->blk);
++		if (desc->uclass_id == UCLASS_USB) {
++			ret = env_set("devtype", "usb");
++		} else {
++			/*
++			 * If the uclass is AHCI, but the driver is ATA
++			 * (not scsi), set devtype to sata
++			 */
++			if (IS_ENABLED(CONFIG_SATA) &&
++			    desc->uclass_id == UCLASS_AHCI)
++				ret = env_set("devtype", "sata");
++			else
++				ret = env_set("devtype", blk_get_devtype(bflow->blk));
++		}
++		if (!ret)
++			ret = env_set_hex("devnum", desc->devnum);
++		if (!ret)
++			ret = env_set_hex("distro_bootpart", bflow->part);
++		if (!ret)
++			ret = env_set("prefix", bflow->subdir);
++		if (!ret && IS_ENABLED(CONFIG_ARCH_SUNXI) &&
++		    !strcmp("mmc", blk_get_devtype(bflow->blk)))
++			ret = env_set_hex("mmc_bootdev", desc->devnum);
+ 	} else {
+-		/* If the uclass is AHCI, but the driver is ATA
+-		 * (not scsi), set devtype to sata
+-		 */
+-		if (IS_ENABLED(CONFIG_SATA) &&
+-		    desc->uclass_id == UCLASS_AHCI)
+-			ret = env_set("devtype", "sata");
+-		else
+-			ret = env_set("devtype", blk_get_devtype(bflow->blk));
++		const struct udevice *media = dev_get_parent(bflow->dev);
++
++		ret = env_set("devtype",
++			      uclass_get_name(device_get_uclass_id(media)));
++		if (!ret)
++			ret = env_set_hex("devnum", dev_seq(media));
+ 	}
+-	if (!ret)
+-		ret = env_set_hex("devnum", desc->devnum);
+-	if (!ret)
+-		ret = env_set_hex("distro_bootpart", bflow->part);
+-	if (!ret)
+-		ret = env_set("prefix", bflow->subdir);
+-	if (!ret && IS_ENABLED(CONFIG_ARCH_SUNXI) &&
+-	    !strcmp("mmc", blk_get_devtype(bflow->blk)))
+-		ret = env_set_hex("mmc_bootdev", desc->devnum);
+ 	if (ret)
+ 		return log_msg_ret("env", ret);
+ 
+-- 
+2.42.0
+
