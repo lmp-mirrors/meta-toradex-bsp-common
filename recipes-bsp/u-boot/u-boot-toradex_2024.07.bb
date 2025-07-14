@@ -26,4 +26,5 @@ TDX_PATCHES = "\
     file://0005-configs-verdin-imx8mp-enable-RNG-support-for-KASLR.patch \
     file://0006-configs-toradex-smarc-imx8mp-enable-RNG-support-for-.patch \
     file://0001-imx8m-set-sane-default-value-for-SPL_LOAD_FIT_ADDRES.patch \
+    file://0001-bootstd-Correct-handling-of-script-from-network.patch \
 "
