@@ -1,0 +1,56 @@
+From 81902568cafa42948f96af96a705cc5b79466431 Mon Sep 17 00:00:00 2001
+From: Vitor Soares <vitor.soares@toradex.com>
+Date: Tue, 15 Jul 2025 10:51:56 +0100
+Subject: [PATCH] toradex: tdx-cfg-block: add verdin i.mx8m mini 0216 pid4
+
+Add PID4 0216 Verdin iMX8M Mini Quad 2GB WB IT to config block handling.
+
+Upstream-Status: Submitted [https://lore.kernel.org/u-boot/20250717110210.443381-1-ivitro@gmail.com/]
+Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
+---
+ board/toradex/common/tdx-cfg-block.c        | 1 +
+ board/toradex/common/tdx-cfg-block.h        | 1 +
+ board/toradex/verdin-imx8mm/verdin-imx8mm.c | 3 ++-
+ 3 files changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
+index ce0e98dd2aa3..92493264190e 100644
+--- a/board/toradex/common/tdx-cfg-block.c
++++ b/board/toradex/common/tdx-cfg-block.c
+@@ -183,6 +183,7 @@ const struct toradex_som toradex_modules[] = {
+ 	{ AQUILA_AM69O_16GB_IT,              "Aquila AM69 Octa 16GB IT",             TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
+ 	{ AQUILA_AM69O_8GB_WB_IT,            "Aquila AM69 Octa 8GB WB IT",           TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
+ 	{ AQUILA_AM69O_8GB_IT,               "Aquila AM69 Octa 8GB IT",              TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
++	{ VERDIN_IMX8MMQ_WB_IT_64G,          "Verdin iMX8M Mini Quad 2GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MM)        },
+ };
+ 
+ struct pid4list {
+diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
+index 6a7e040da5aa..83a58cea6d21 100644
+--- a/board/toradex/common/tdx-cfg-block.h
++++ b/board/toradex/common/tdx-cfg-block.h
+@@ -141,6 +141,7 @@ enum {
+ 	AQUILA_AM69O_16GB_IT,
+ 	AQUILA_AM69O_8GB_WB_IT,
+ 	AQUILA_AM69O_8GB_IT, /* 215 */
++	VERDIN_IMX8MMQ_WB_IT_64G,
+ };
+ 
+ enum {
+diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
+index 5f9206b0966f..5e12e7c73d38 100644
+--- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
++++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
+@@ -85,7 +85,8 @@ static void select_dt_from_module_version(void)
+ 		is_wifi = (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT) ||
+ 			  (tdx_hw_tag.prodid == VERDIN_IMX8MMDL_WIFI_BT_IT) ||
+ 			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT_NO_CAN) ||
+-			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_4G_WIFI_BT_ET);
++			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_4G_WIFI_BT_ET) ||
++			  (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WB_IT_64G);
+ 	}
+ 
+ 	switch (get_pcb_revision()) {
+-- 
+2.43.0
+
