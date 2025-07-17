@@ -27,4 +27,5 @@ TDX_PATCHES = "\
     file://0006-configs-toradex-smarc-imx8mp-enable-RNG-support-for-.patch \
     file://0001-imx8m-set-sane-default-value-for-SPL_LOAD_FIT_ADDRES.patch \
     file://0001-bootstd-Correct-handling-of-script-from-network.patch \
+    file://0001-toradex-tdx-cfg-block-add-verdin-i.mx8m-mini-0216.patch \
 "
