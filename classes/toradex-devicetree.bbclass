@@ -47,6 +47,8 @@ KERNEL_INCLUDE:append = " ${STAGING_KERNEL_DIR}/arch/${ARCH}/boot/dts/${KERNEL_D
 MACHINE_PREFIX = "${MACHINE}"
 MACHINE_PREFIX:colibri-imx6ull-emmc = "colibri-imx6ull"
 MACHINE_PREFIX:colibri-imx7-emmc = "colibri-imx7"
+MACHINE_PREFIX:toradex-smarc-imx95-a1 = "toradex-smarc-imx95"
+MACHINE_PREFIX:verdin-imx95-a1 = "verdin-imx95"
 
 do_collect_overlays () {
     if [ -z "${TEZI_EXTERNAL_KERNEL_DEVICETREE}" ] ; then
