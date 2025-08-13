@@ -10,8 +10,8 @@ LINUX_REPO = "git://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.g
 # set PV manually, that way PREFERRED_VERSION can be set to a constant value
 PV = "6.6"
 KBRANCH = "v6.6-rt"
-SRCREV_meta-toradex-bsp = "57b5edcdc64c6625b045b663d8f3ff92b2dc627e"
-SRCREV_machine = "9ce90b76d5069580f8a3657c539be4c1b6ef9b4c"
+SRCREV_meta-toradex-bsp = "9695cd0663a25fe4dc88da01e63cfa37bcb9e2e6"
+SRCREV_machine = "60cd74b07c62041e678aaf0bdb49e3c542033e8c"
 SRCREV_machine:use-head-next = "${AUTOREV}"
 
 LINUX_KERNEL_TYPE = "preempt-rt"
