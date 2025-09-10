@@ -19,6 +19,14 @@ DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'dt-validation', '', 'python3-
 
 PV = "${LINUX_VERSION}+git${SRCPV}"
 
+def get_linux_base_version(d):
+    linux_version = d.getVar('LINUX_VERSION')
+    if '-rt' in linux_version:
+        return linux_version.split('-rt')[0]
+    return linux_version
+
+CVE_VERSION = "${@get_linux_base_version(d)}"
+
 SRC_URI = " \
     ${LINUX_REPO};protocol=https;branch=${KBRANCH};name=machine \
     ${KCONFIG_REPO};protocol=https;type=kmeta;name=meta-toradex-bsp;branch=main;destsuffix=${KMETA} \
