@@ -260,7 +260,7 @@ def rootfs_tezi_emmc(d, use_bootfiles):
                          "filename": imagename + "." + d.getVar('TEZI_ROOT_SUFFIX')
                        }
                      ],
-                     "uncompressed_size": get_uncompressed_size(d, d.getVar('TEZI_ROOT_NAME'))
+                     "uncompressed_size": os.path.getsize(d.getVar('IMGDEPLOYDIR') + "/" + imagename + "." + d.getVar('TEZI_ROOT_SUFFIX')) // 1048576
                    }
                  }
     else:
