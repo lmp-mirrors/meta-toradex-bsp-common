@@ -29,4 +29,8 @@ TDX_PATCHES = "\
     file://0001-imx8m-set-sane-default-value-for-SPL_LOAD_FIT_ADDRES.patch \
     file://0001-bootstd-Correct-handling-of-script-from-network.patch \
     file://0001-toradex-tdx-cfg-block-add-verdin-i.mx8m-mini-0216.patch \
+    file://0001-configs-apalis-imx6-enable-USB-Gadget-OS-Descriptors.patch \
+    file://0002-configs-colibri-enable-USB-Gadget-OS-Descriptors-for.patch \
+    file://0003-configs-verdin-imx8m-mp-enable-USB-Gadget-OS-Descrip.patch \
+    file://0004-configs-toradex-smarc-imx8mp-enable-USB-Gadget-OS-De.patch \
 "
