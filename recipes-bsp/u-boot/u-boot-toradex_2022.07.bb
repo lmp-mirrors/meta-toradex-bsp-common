@@ -42,6 +42,8 @@ TDX_PATCHES = " \
     file://0001-board-toradex-apalis-colibri-imx6-Detect-new-v1.2-So.patch \
     file://0002-toradex-apalis-colibri-imx6-Select-correct-DTB-for-S.patch \
     file://0001-toradex-tdx-cfg-block-add-pid-0091-to-0099-0201-to-0215-support.patch \
+    file://0001-configs-apalis-imx6-enable-USB-Gadget-OS-Descriptors.patch \
+    file://0002-configs-colibri-enable-USB-Gadget-OS-Descriptors-for.patch \
 "
 SRC_URI:append = " ${TDX_PATCHES}"
 
