@@ -59,10 +59,10 @@ SRC_URI:append = " \
     file://0002-ARM-dts-apalis-colibri-imx6-Add-support-for-v1.2.patch \
 "
 
-LINUX_VERSION ?= "6.1.154"
+LINUX_VERSION ?= "6.1.159"
 KBRANCH = "linux-6.1.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
-SRCREV_machine = "7b34dc04e4ff0f37ba4ad8414f42abae9f8f68e4"
+SRCREV_machine = "50cbba13faa294918f0e1a9cb2b0aba19f4e6fba"
 SRCREV_machine:use-head-next = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
