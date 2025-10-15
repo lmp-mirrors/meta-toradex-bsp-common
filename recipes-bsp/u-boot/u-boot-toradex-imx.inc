@@ -15,13 +15,14 @@ do_deploy:append:mx8m-generic-bsp() {
                 j=$(expr $j + 1);
                 if [ $j -eq $i ]
                 then
+                    builddir="${config}-${type}"
                     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-                    install -m 0777 ${B}/${config}/u-boot-nodtb.bin  ${DEPLOYDIR}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${type}
-                    uboot_dtb=$(grep "CONFIG_DEFAULT_DEVICE_TREE=" ${B}/${config}/.config | sed 's/CONFIG_DEFAULT_DEVICE_TREE=\"\(.*\)\"/\1.dtb/')
-                    if grep -q "^CONFIG_OF_UPSTREAM=y" ${B}/${config}/.config; then
-                        install -m 0777 ${B}/${config}/dts/upstream/src/arm64/${uboot_dtb} ${DEPLOYDIR}/${BOOT_TOOLS}
+                    install -m 0777 ${B}/${builddir}/u-boot-nodtb.bin  ${DEPLOYDIR}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${type}
+                    uboot_dtb=$(grep "CONFIG_DEFAULT_DEVICE_TREE=" ${B}/${builddir}/.config | sed 's/CONFIG_DEFAULT_DEVICE_TREE=\"\(.*\)\"/\1.dtb/')
+                    if grep -q "^CONFIG_OF_UPSTREAM=y" ${B}/${builddir}/.config; then
+                        install -m 0777 ${B}/${builddir}/dts/upstream/src/arm64/${uboot_dtb} ${DEPLOYDIR}/${BOOT_TOOLS}
                     else
-                        install -m 0777 ${B}/${config}/arch/arm/dts/${uboot_dtb} ${DEPLOYDIR}/${BOOT_TOOLS}
+                        install -m 0777 ${B}/${builddir}/arch/arm/dts/${uboot_dtb} ${DEPLOYDIR}/${BOOT_TOOLS}
                     fi
                 fi
             done

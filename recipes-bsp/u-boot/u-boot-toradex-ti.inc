@@ -42,7 +42,8 @@ do_deploy:append:k3 () {
     if [ -n "${UBOOT_CONFIG}" ]
     then
         for config in ${UBOOT_MACHINE}; do
-            for f in ${B}/${config}/firmware-*.bin; do
+            builddir="${config}-${type}"
+            for f in ${B}/${builddir}/firmware-*.bin; do
                 if [ -f "$f" ]; then
                     install -m 644 $f ${DEPLOYDIR}/
                 fi
@@ -63,17 +64,18 @@ do_deploy:append:k3r5 () {
             fi
             i=$(expr $i + 1);
             for type in ${UBOOT_CONFIG}; do
+                builddir="${config}-${type}"
                 j=$(expr $j + 1);
                 if [ $j -eq $i ]
                 then
-                    for f in ${B}/${config}/tiboot3-*.bin; do
+                    for f in ${B}/${builddir}/tiboot3-*.bin; do
                         if [ -f "$f" ]; then
                             TARGET=$(basename $f)${TARGETSUFFIX}
                             install -m 644 $f ${DEPLOYDIR}/${TARGET}
                         fi
                     done
 
-                    for f in ${B}/${config}/sysfw*.itb; do
+                    for f in ${B}/${builddir}/sysfw*.itb; do
                             if [ -f "$f" ]; then
                                     install -m 644 $f ${DEPLOYDIR}/
                             fi
