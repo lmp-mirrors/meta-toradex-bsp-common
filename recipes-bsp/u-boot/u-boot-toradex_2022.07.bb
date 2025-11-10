@@ -45,7 +45,10 @@ TDX_PATCHES = " \
     file://0001-configs-apalis-imx6-enable-USB-Gadget-OS-Descriptors.patch \
     file://0002-configs-colibri-enable-USB-Gadget-OS-Descriptors-for.patch \
 "
-SRC_URI:append = " ${TDX_PATCHES}"
+SRC_URI = " \
+    git://git.toradex.com/u-boot-toradex.git;protocol=https;branch=master \
+    ${TDX_PATCHES} \
+"
 
 inherit toradex-u-boot-localversion
 
