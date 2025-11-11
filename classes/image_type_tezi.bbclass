@@ -41,6 +41,7 @@ TEZI_DATA_LABEL ??= "DATA"
 TEZI_DATA_FSTYPE ??= "ext4"
 TEZI_DATA_FSOPTS ?= "-E nodiscard"
 TEZI_DATA_FILES ?= ""
+TEZI_DATA_WANT_MAXIMIZED ??= "1"
 TEZI_USE_BOOTFILES ??= "true"
 TEZI_AUTO_INSTALL ??= "false"
 TEZI_BOOT_SUFFIX ??= "${@'bootfs.tar.xz' if oe.types.boolean('${TEZI_USE_BOOTFILES}') else ''}"
@@ -287,7 +288,7 @@ def rootfs_tezi_emmc(d, use_bootfiles):
         data = {
                    "partition_size_nominal": d.getVar('TEZI_DATA_PART_SIZE'),
                    "partition_type": d.getVar('TEZI_DATA_PART_TYPE'),
-                   "want_maximised": True,
+                   "want_maximised": d.getVar('TEZI_DATA_WANT_MAXIMIZED') == "1",
                    "content": {
                      "label": d.getVar('TEZI_DATA_LABEL'),
                      "filesystem_type": d.getVar('TEZI_DATA_FSTYPE'),
