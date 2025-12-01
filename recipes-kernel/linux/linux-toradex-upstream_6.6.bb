@@ -64,7 +64,7 @@ TDX_PATCHES = " \
     file://0001-wifi-mwifiex-discard-erroneous-disassoc-frames-on-ST.patch \
 "
 PV = "6.6"
-LINUX_VERSION ?= "6.6.115"
+LINUX_VERSION ?= "6.6.117"
 KBRANCH = "linux-6.6.y"
 KERNEL_VERSION_SANITY_SKIP = "1"
 SRCREV_machine = "1e89a1be4fe907d9c573fe98875bff132e7ac6c8"
