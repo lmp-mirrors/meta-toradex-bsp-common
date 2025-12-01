@@ -7,17 +7,17 @@ ATH11K_FIRMWARE_PATH = "${nonarch_base_libdir}/firmware/ath11k/WCN6855/hw2.1"
 ATH12K_FIRMWARE_PATH = "${nonarch_base_libdir}/firmware/ath12k/WCN7850/hw2.0"
 
 install_sx_pceax_board_files () {
-        install -m 0644 ${WORKDIR}/sx-pceax-board-files/board-2_US_EU_JP.bin ${D}${ATH11K_FIRMWARE_PATH}
-        install -m 0644 ${WORKDIR}/sx-pceax-board-files/board-2_UK_CA.bin    ${D}${ATH11K_FIRMWARE_PATH}
+        install -m 0644 ${UNPACKDIR}/sx-pceax-board-files/board-2_US_EU_JP.bin ${D}${ATH11K_FIRMWARE_PATH}
+        install -m 0644 ${UNPACKDIR}/sx-pceax-board-files/board-2_UK_CA.bin    ${D}${ATH11K_FIRMWARE_PATH}
 
         rm -f ${D}${ATH11K_FIRMWARE_PATH}/board-2.bin
         ln -frs ${D}${ATH11K_FIRMWARE_PATH}/board-2_US_EU_JP.bin ${D}${ATH11K_FIRMWARE_PATH}/board-2.bin
 }
 
 install_sx_pcebe_board_files () {
-        install -m 0644 ${WORKDIR}/sx-pcebe-board-files/board-2_US_EU_JP.bin   ${D}${ATH12K_FIRMWARE_PATH}
-        install -m 0644 ${WORKDIR}/sx-pcebe-board-files/board-2_UK_CA_high.bin ${D}${ATH12K_FIRMWARE_PATH}
-        install -m 0644 ${WORKDIR}/sx-pcebe-board-files/board-2_UK_CA_low.bin  ${D}${ATH12K_FIRMWARE_PATH}
+        install -m 0644 ${UNPACKDIR}/sx-pcebe-board-files/board-2_US_EU_JP.bin   ${D}${ATH12K_FIRMWARE_PATH}
+        install -m 0644 ${UNPACKDIR}/sx-pcebe-board-files/board-2_UK_CA_high.bin ${D}${ATH12K_FIRMWARE_PATH}
+        install -m 0644 ${UNPACKDIR}/sx-pcebe-board-files/board-2_UK_CA_low.bin  ${D}${ATH12K_FIRMWARE_PATH}
 
         rm -f ${D}${ATH12K_FIRMWARE_PATH}/board-2.bin
         ln -frs ${D}${ATH12K_FIRMWARE_PATH}/board-2_US_EU_JP.bin ${D}${ATH12K_FIRMWARE_PATH}/board-2.bin
