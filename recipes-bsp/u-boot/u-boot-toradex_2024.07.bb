@@ -33,4 +33,5 @@ TDX_PATCHES = "\
     file://0003-configs-verdin-imx8m-mp-enable-USB-Gadget-OS-Descrip.patch \
     file://0004-configs-toradex-smarc-imx8mp-enable-USB-Gadget-OS-De.patch \
     file://0001-configs-colibri-imx7-set-fdtfile-generically-in-P.patch \
+    file://0001-toradex-tdx-cfg-block-add-pid4-support-for-new-modul.patch \
 "

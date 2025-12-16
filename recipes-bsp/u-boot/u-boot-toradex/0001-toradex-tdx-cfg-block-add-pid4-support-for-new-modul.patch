@@ -1,0 +1,62 @@
+From 501dd0ffe1061cbd25826254ffb9b332fe8a6673 Mon Sep 17 00:00:00 2001
+From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Date: Mon, 15 Dec 2025 10:53:32 +0100
+Subject: [PATCH] toradex: tdx-cfg-block: add pid4 support for new modules
+
+Add new PID4 to ConfigBlock handling:
+ - 0217 Lino iMX93 Dual 2GB IT
+ - 0218 Lino iMX91 Solo 2GB IT
+ - 0219 OSM iMX93 Dual 2GB IT
+ - 0220 OSM iMX91 Solo 2GB IT
+ - 0221 Verdin AM62 Dual 1GB ET
+
+Lino and OSM are two new SoM families.
+The Verdin variant differs from the existing 0073 Verdin AM62 Dual 1GB ET
+by the presence of the GPU (AM625 instead of AM623), the absence of
+DSI interface (bridge not mounted) and eMMC size increased to 16GB instead
+of 4GB.
+
+Link: https://www.toradex.com/computer-on-modules/lino-arm-family
+Link: https://www.toradex.com/computer-on-modules/osm-arm-family
+Upstream-Status: Submitted [https://lore.kernel.org/u-boot/20251216084532.613791-1-ghidoliemanuele@gmail.com/]
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+---
+ board/toradex/common/tdx-cfg-block.c | 5 +++++
+ board/toradex/common/tdx-cfg-block.h | 5 +++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
+index 92493264190e..215d355317e1 100644
+--- a/board/toradex/common/tdx-cfg-block.c
++++ b/board/toradex/common/tdx-cfg-block.c
+@@ -184,6 +184,11 @@ const struct toradex_som toradex_modules[] = {
+ 	{ AQUILA_AM69O_8GB_WB_IT,            "Aquila AM69 Octa 8GB WB IT",           TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
+ 	{ AQUILA_AM69O_8GB_IT,               "Aquila AM69 Octa 8GB IT",              TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
+ 	{ VERDIN_IMX8MMQ_WB_IT_64G,          "Verdin iMX8M Mini Quad 2GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MM)        },
++	{ LINO_IMX93D_2GB_IT,                "Lino iMX93 Dual 2GB IT",               TARGET_IS_ENABLED(LINO_IMX93)           },
++	{ LINO_IMX91S_2GB_IT,                "Lino iMX91 Solo 2GB IT",               TARGET_IS_ENABLED(LINO_IMX91)           },
++	{ OSM_IMX93D_2GB_IT,                 "OSM iMX93 Dual 2GB IT",                TARGET_IS_ENABLED(TORADEX_OSM_IMX93)    },
++	{ OSM_IMX91S_2GB_IT,                 "OSM iMX91 Solo 2GB IT",                TARGET_IS_ENABLED(TORADEX_OSM_IMX91)    },
++	{ VERDIN_AM62D_1G_ET_GPU_NODSI,      "Verdin AM62 Dual 1GB ET",              TARGET_IS_ENABLED(VERDIN_AM62_A53)      },
+ };
+ 
+ struct pid4list {
+diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
+index 83a58cea6d21..787be8ed5c8f 100644
+--- a/board/toradex/common/tdx-cfg-block.h
++++ b/board/toradex/common/tdx-cfg-block.h
+@@ -142,6 +142,11 @@ enum {
+ 	AQUILA_AM69O_8GB_WB_IT,
+ 	AQUILA_AM69O_8GB_IT, /* 215 */
+ 	VERDIN_IMX8MMQ_WB_IT_64G,
++	LINO_IMX93D_2GB_IT,
++	LINO_IMX91S_2GB_IT,
++	OSM_IMX93D_2GB_IT,
++	OSM_IMX91S_2GB_IT, /* 220 */
++	VERDIN_AM62D_1G_ET_GPU_NODSI,
+ };
+ 
+ enum {
+-- 
+2.43.0
+
