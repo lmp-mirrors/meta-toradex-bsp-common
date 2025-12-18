@@ -15,7 +15,7 @@ PLAT_SFX:am62xx = "am62xx"
 PLAT_SFX:am62axx = "am62axx"
 PLAT_SFX:am62pxx = "am62pxx"
 
-PACKAGECONFIG[atf] = "BL31=${STAGING_DIR_HOST}/firmware/bl31.bin,,trusted-firmware-a"
+PACKAGECONFIG[atf] = "BL31=${STAGING_DIR_HOST}/firmware/trusted-firmware-a/bl31.bin,,trusted-firmware-a"
 PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/bl32.bin,,optee-os"
 PACKAGECONFIG[dm] = "DM=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/ti-dm/${PLAT_SFX}/${DM_FIRMWARE},,ti-dm-fw"
 
