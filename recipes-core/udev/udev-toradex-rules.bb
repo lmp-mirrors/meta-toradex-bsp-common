@@ -22,6 +22,10 @@ SRC_URI:append:aquila-imx95 = " \
     file://10-toradex-can2-ifname.link \
     file://10-toradex-can3-ifname.link \
 "
+SRC_URI:append:toradex-osm-imx93 = " \
+    file://10-toradex-can0-ifname.link \
+    file://10-toradex-can1-ifname.link \
+"
 SRC_URI:append:toradex-smarc-imx8mp = " \
     file://10-toradex-can0-ifname.link \
     file://10-toradex-can1-ifname.link \
@@ -54,7 +58,7 @@ do_install () {
     install -d ${D}${sysconfdir}/udev/rules.d
     install -d ${D}${sysconfdir}/udev/scripts
     install -d ${D}${sysconfdir}/systemd/network
-    # 10-toradex-can*-ifname.link files are only available for the Aquila and Verdin family
+    # 10-toradex-can*-ifname.link files are available for Aquila, OSM, SMARC and Verdin family
     if [ -f ${WORKDIR}/10-toradex-can0-ifname.link ]; then
         install -m 0644 ${WORKDIR}/10-toradex-can0-ifname.link ${D}${sysconfdir}/systemd/network/
     fi
