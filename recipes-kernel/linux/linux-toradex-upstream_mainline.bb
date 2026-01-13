@@ -12,6 +12,10 @@ TDX_PATCHES = " \
     file://0004-media-i2c-ov5640-Implement-get_mbus_config.patch \
     file://0001-usb-gadget-f_ncm-Apply-workaround-for-packet-cloggin.patch \
 "
+TDX_PATCHES:append:apalis-imx8 = " \
+    file://0001-MLK-16005-2-soc-imx-scu-add-the-SW-workaround-for-i..patch \
+    file://0002-MLK-16005-2-arm64-tlb-add-the-SW-workaround-for-i.MX.patch \
+"
 # set PV manually, that way PREFERRED_VERSION can be set to a constant value
 PV = "mainline"
 LINUX_VERSION = "6.13-rc"
