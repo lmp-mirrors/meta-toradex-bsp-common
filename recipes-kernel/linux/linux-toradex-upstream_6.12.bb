@@ -35,6 +35,9 @@ TDX_PATCHES = " \
     file://0007-arm64-dts-freescale-imx8mp-toradex-smarc-add-gpio-ex.patch \
     file://0008-arm64-dts-freescale-imx8mp-toradex-smarc-use-generic.patch \
     file://0001-arm64-dts-freescale-imx8mp-toradex-smarc-remove-gpio.patch \
+    file://0001-net-phy-add-a-new-phy_device-flag-to-keep-preamble-b.patch \
+    file://0002-net-phy-micrel-add-option-to-keep-the-preamble-befor.patch \
+    file://0003-net-stmmac-dwmac-imx-keep-preamble-before-sfd-on-i.M.patch \
 "
 
 PV = "6.12"
