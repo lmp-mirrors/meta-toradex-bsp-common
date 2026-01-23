@@ -1,0 +1,131 @@
+From dfbfc11c9907413cd9376ee50c94f31e902021cf Mon Sep 17 00:00:00 2001
+From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+Date: Tue, 20 Jan 2026 11:47:41 +0100
+Subject: [PATCH 3/3] net: stmmac: dwmac-imx: keep preamble before sfd on
+ i.MX8MP
+
+The stmmac implementation used by NXP for the i.MX8MP SoC is subject to
+errata ERR050694. According to this errata, when no preamble byte is
+transferred before the SFD from the PHY to the MAC, the MAC will discard
+the frame.
+
+Setting the PHY_F_KEEP_PREAMBLE_BEFORE_SFD flag instructs PHYs that
+support it to keep the preamble byte before the SFD. This ensures that
+the MAC successfully receives frames.
+
+As this is an issue in the MAC implementation, only enable the flag for
+the i.MX8MP SoC where the errata applies but not for other SoCs using a
+working stmmac implementation.
+
+The exact wording of the errata ERR050694 from NXP:
+The IEEE 802.3 standard states that, in MII/GMII modes, the byte
+preceding the SFD (0xD5), SMD-S (0xE6,0x4C, 0x7F, or 0xB3), or SMD-C
+(0x61, 0x52, 0x9E, or 0x2A) byte can be a non-PREAMBLE byte or there can
+be no preceding preamble byte. The MAC receiver must successfully
+receive a packet without any preamble(0x55) byte preceding the SFD,
+SMD-S, or SMD-C byte.
+However due to the defect, in configurations where frame preemption is
+enabled, when preamble byte does not precede the SFD, SMD-S, or SMD-C
+byte, the received packet is discarded by the MAC receiver. This is
+because, the start-of-packet detection logic of the MAC receiver
+incorrectly checks for a preamble byte.
+
+NXP refers to IEEE 802.3 where in clause 35.2.3.2.2 Receive case (GMII)
+they show two tables one where the preamble is preceding the SFD and one
+where it is not. The text says:
+The operation of 1000 Mb/s PHYs can result in shrinkage of the preamble
+between transmission at the source GMII and reception at the destination
+GMII. Table 35-3 depicts the case where no preamble bytes are conveyed
+across the GMII. This case may not be possible with a specific PHY, but
+illustrates the minimum preamble with which MAC shall be able to
+operate. Table 35-4 depicts the case where the entire preamble is
+conveyed across the GMII.
+
+This workaround was tested on a Verdin iMX8MP by enforcing 10 MBit/s:
+ethtool -s end0 speed 10
+Without keeping the preamble, no packet were received. With keeping the
+preamble, everything worked as expected.
+
+Upstream-Status: Submitted [https://lore.kernel.org/all/20260120203905.23805-4-eichest@gmail.com/]
+Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+---
+ drivers/net/ethernet/stmicro/stmmac/dwmac-imx.c   | 6 +++++-
+ drivers/net/ethernet/stmicro/stmmac/stmmac_main.c | 8 +++++++-
+ include/linux/stmmac.h                            | 1 +
+ 3 files changed, 13 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac-imx.c b/drivers/net/ethernet/stmicro/stmmac/dwmac-imx.c
+index f544e4b42915f..ccc4aa4d556c7 100644
+--- a/drivers/net/ethernet/stmicro/stmmac/dwmac-imx.c
++++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-imx.c
+@@ -412,6 +412,9 @@ static int imx_dwmac_probe(struct platform_device *pdev)
+ 	if (data->flags & STMMAC_FLAG_HWTSTAMP_CORRECT_LATENCY)
+ 		plat_dat->flags |= STMMAC_FLAG_HWTSTAMP_CORRECT_LATENCY;
+ 
++	if (data->flags & STMMAC_FLAG_KEEP_PREAMBLE_BEFORE_SFD)
++		plat_dat->flags |= STMMAC_FLAG_KEEP_PREAMBLE_BEFORE_SFD;
++
+ 	/* Default TX Q0 to use TSO and rest TXQ for TBS */
+ 	for (int i = 1; i < plat_dat->tx_queues_to_use; i++)
+ 		plat_dat->tx_queues_cfg[i].tbs_en = 1;
+@@ -456,7 +459,8 @@ static struct imx_dwmac_ops imx8mp_dwmac_data = {
+ 	.addr_width = 34,
+ 	.mac_rgmii_txclk_auto_adj = false,
+ 	.set_intf_mode = imx8mp_set_intf_mode,
+-	.flags = STMMAC_FLAG_HWTSTAMP_CORRECT_LATENCY,
++	.flags = STMMAC_FLAG_HWTSTAMP_CORRECT_LATENCY |
++		 STMMAC_FLAG_KEEP_PREAMBLE_BEFORE_SFD,
+ };
+ 
+ static struct imx_dwmac_ops imx8dxl_dwmac_data = {
+diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+index fd1644c91eb2b..42cc0d7534f99 100644
+--- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
++++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+@@ -1193,6 +1193,7 @@ static int stmmac_init_phy(struct net_device *dev)
+ 	struct stmmac_priv *priv = netdev_priv(dev);
+ 	struct fwnode_handle *phy_fwnode;
+ 	struct fwnode_handle *fwnode;
++	u32 dev_flags = 0;
+ 	int ret;
+ 
+ 	if (!phylink_expects_phy(priv->phylink))
+@@ -1207,6 +1208,9 @@ static int stmmac_init_phy(struct net_device *dev)
+ 	else
+ 		phy_fwnode = NULL;
+ 
++	if (priv->plat->flags & STMMAC_FLAG_KEEP_PREAMBLE_BEFORE_SFD)
++		dev_flags |= PHY_F_KEEP_PREAMBLE_BEFORE_SFD;
++
+ 	/* Some DT bindings do not set-up the PHY handle. Let's try to
+ 	 * manually parse it
+ 	 */
+@@ -1228,10 +1232,12 @@ static int stmmac_init_phy(struct net_device *dev)
+ 		if (priv->dma_cap.eee)
+ 			phy_support_eee(phydev);
+ 
++		phydev->dev_flags |= dev_flags;
++
+ 		ret = phylink_connect_phy(priv->phylink, phydev);
+ 	} else {
+ 		fwnode_handle_put(phy_fwnode);
+-		ret = phylink_fwnode_phy_connect(priv->phylink, fwnode, 0);
++		ret = phylink_fwnode_phy_connect(priv->phylink, fwnode, dev_flags);
+ 	}
+ 
+ 	if (!priv->plat->pmt) {
+diff --git a/include/linux/stmmac.h b/include/linux/stmmac.h
+index d79ff252cfdc1..ddbb50a384e35 100644
+--- a/include/linux/stmmac.h
++++ b/include/linux/stmmac.h
+@@ -181,6 +181,7 @@ struct dwmac4_addrs {
+ #define STMMAC_FLAG_RX_CLK_RUNS_IN_LPI		BIT(10)
+ #define STMMAC_FLAG_EN_TX_LPI_CLOCKGATING	BIT(11)
+ #define STMMAC_FLAG_HWTSTAMP_CORRECT_LATENCY	BIT(12)
++#define STMMAC_FLAG_KEEP_PREAMBLE_BEFORE_SFD	BIT(14)
+ 
+ struct plat_stmmacenet_data {
+ 	int bus_id;
+-- 
+2.51.0
+
