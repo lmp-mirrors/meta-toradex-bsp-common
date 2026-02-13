@@ -1,0 +1,43 @@
+From 1c19bb56c25d57abaa12cc43c7dfc880d02cedb8 Mon Sep 17 00:00:00 2001
+From: Vitor Soares <vitor.soares@toradex.com>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Date: Thu, 12 Feb 2026 22:16:28 +0000
+Subject: [PATCH] toradex: tdx-cfg-block: add aquila tda4 0223 pid4
+
+Add PID4 0223 Aquila TDA4 Octa 16GB IT to config block handling.
+
+Upstream-Status: Submitted [https://lore.kernel.org/u-boot/20260213120200.543875-1-ivitro@gmail.com/]
+Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
+---
+ board/toradex/common/tdx-cfg-block.c | 1 +
+ board/toradex/common/tdx-cfg-block.h | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
+index 0fc3759695fc..17fda5038d41 100644
+--- a/board/toradex/common/tdx-cfg-block.c
++++ b/board/toradex/common/tdx-cfg-block.c
+@@ -189,6 +189,7 @@ const struct toradex_som toradex_modules[] = {
+ 	{ OSM_IMX93D_2GB_IT,                 "OSM iMX93 Dual 2GB IT",                TARGET_IS_ENABLED(TORADEX_OSM_IMX93)    },
+ 	{ OSM_IMX91S_2GB_IT,                 "OSM iMX91 Solo 2GB IT",                TARGET_IS_ENABLED(TORADEX_OSM_IMX91)    },
+ 	{ VERDIN_AM62D_1G_ET_GPU_NODSI,      "Verdin AM62 Dual 1GB ET",              TARGET_IS_ENABLED(VERDIN_AM62_A53)      },
++	{ AQUILA_TDA4O_16GB_IT,              "Aquila TDA4 Octa 16GB IT",             TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
+ };
+ 
+ struct pid4list {
+diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
+index b28033d8332e..69d4f5e449c6 100644
+--- a/board/toradex/common/tdx-cfg-block.h
++++ b/board/toradex/common/tdx-cfg-block.h
+@@ -147,6 +147,7 @@ enum {
+ 	OSM_IMX93D_2GB_IT,
+ 	OSM_IMX91S_2GB_IT, /* 220 */
+ 	VERDIN_AM62D_1G_ET_GPU_NODSI,
++	AQUILA_TDA4O_16GB_IT = 223,
+ };
+ 
+ enum {
+-- 
+2.52.0
+
