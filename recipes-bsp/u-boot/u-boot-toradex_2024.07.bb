@@ -34,4 +34,5 @@ TDX_PATCHES = "\
     file://0004-configs-toradex-smarc-imx8mp-enable-USB-Gadget-OS-De.patch \
     file://0001-configs-colibri-imx7-set-fdtfile-generically-in-P.patch \
     file://0001-toradex-tdx-cfg-block-add-pid4-support-for-new-modul.patch \
+    file://0001-toradex-tdx-cfg-block-add-aquila-tda4-0223-pid4.patch \
 "
