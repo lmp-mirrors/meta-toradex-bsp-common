@@ -8,6 +8,8 @@ PACKAGECONFIG:append:upstream:colibri-imx6ull = " use-pixman"
 PACKAGECONFIG:append:upstream:colibri-imx6ull-emmc = " use-pixman"
 PACKAGECONFIG:append:upstream:colibri-imx7 = " use-pixman"
 PACKAGECONFIG:append:upstream:colibri-imx7-emmc = " use-pixman"
+PACKAGECONFIG:append:lino-imx93 = " use-pixman"
+PACKAGECONFIG:append:toradex-osm-imx93 = " use-pixman"
 
 do_install:append:tdx-distro() {
     install -Dm0755 ${UNPACKDIR}/weston.sh ${D}${sysconfdir}/profile.d/weston.sh
