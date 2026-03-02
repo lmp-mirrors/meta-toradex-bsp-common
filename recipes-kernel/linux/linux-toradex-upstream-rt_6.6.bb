@@ -11,7 +11,7 @@ LINUX_REPO = "git://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.g
 PV = "6.6"
 KBRANCH = "v6.6-rt"
 SRCREV_meta-toradex-bsp = "97124253a227df171a7a622949968f474963fe04"
-SRCREV_machine = "67a5a2ed7ebca42a646433ff04b3559a5beda48a"
+SRCREV_machine = "543b9df171270370337c53964ed88b85578a16f8"
 SRCREV_machine:use-head-next = "${AUTOREV}"
 
 LINUX_KERNEL_TYPE = "preempt-rt"
