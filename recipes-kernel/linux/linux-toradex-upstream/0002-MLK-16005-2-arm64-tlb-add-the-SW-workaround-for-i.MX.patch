@@ -1,4 +1,4 @@
-From ab04ecf766360b5cf804f1fd849b653a7f006ddf Mon Sep 17 00:00:00 2001
+From c5c62464c1aa2398e44554fda282fbc89f27fbab Mon Sep 17 00:00:00 2001
 From: Li Yang <leoyang.li@nxp.com>
 Date: Mon, 14 Aug 2023 15:22:21 -0500
 Subject: [PATCH 2/2] MLK-16005-2 arm64: tlb: add the SW workaround for i.MX8QM
@@ -52,7 +52,7 @@ Signed-off-by: Li Yang <leoyang.li@nxp.com>
  3 files changed, 71 insertions(+), 8 deletions(-)
 
 diff --git a/arch/arm64/include/asm/tlbflush.h b/arch/arm64/include/asm/tlbflush.h
-index a2d65d7d6aae..b812449f2219 100644
+index 1416e652612b..fa7218ae1af4 100644
 --- a/arch/arm64/include/asm/tlbflush.h
 +++ b/arch/arm64/include/asm/tlbflush.h
 @@ -17,6 +17,8 @@
@@ -64,13 +64,13 @@ index a2d65d7d6aae..b812449f2219 100644
  /*
   * Raw TLBI operations.
   *
-@@ -289,9 +291,16 @@ static inline void flush_tlb_mm(struct mm_struct *mm)
+@@ -309,9 +311,16 @@ static inline void flush_tlb_mm(struct mm_struct *mm)
  
  	dsb(ishst);
  	asid = __TLBI_VADDR(0, ASID(mm));
 -	__tlbi(aside1is, asid);
 -	__tlbi_user(aside1is, asid);
--	dsb(ish);
+-	__tlbi_sync_s1ish();
 +	if (TKT340553_SW_WORKAROUND) {
 +		/* Flush the entire TLB */
 +		__tlbi(vmalle1is);
@@ -79,12 +79,12 @@ index a2d65d7d6aae..b812449f2219 100644
 +	} else {
 +		__tlbi(aside1is, asid);
 +		__tlbi_user(aside1is, asid);
-+		dsb(ish);
++		__tlbi_sync_s1ish();
 +	}
  	mmu_notifier_arch_invalidate_secondary_tlbs(mm, 0, -1UL);
  }
  
-@@ -329,8 +338,15 @@ static inline void __flush_tlb_page_nosync(struct mm_struct *mm,
+@@ -349,8 +358,15 @@ static inline void __flush_tlb_page_nosync(struct mm_struct *mm,
  
  	dsb(ishst);
  	addr = __TLBI_VADDR(uaddr, ASID(mm));
@@ -102,7 +102,7 @@ index a2d65d7d6aae..b812449f2219 100644
  	mmu_notifier_arch_invalidate_secondary_tlbs(mm, uaddr & PAGE_MASK,
  						(uaddr & PAGE_MASK) + PAGE_SIZE);
  }
-@@ -492,6 +508,14 @@ static inline void __flush_tlb_range_nosync(struct mm_struct *mm,
+@@ -503,6 +519,14 @@ static inline void __flush_tlb_range_nosync(struct mm_struct *mm,
  	dsb(ishst);
  	asid = ASID(mm);
  
@@ -117,7 +117,7 @@ index a2d65d7d6aae..b812449f2219 100644
  	if (last_level)
  		__flush_tlb_range_op(vale1is, start, pages, stride, asid,
  				     tlb_level, true, lpa2_is_enabled());
-@@ -549,7 +573,8 @@ static inline void flush_tlb_kernel_range(unsigned long start, unsigned long end
+@@ -560,7 +584,8 @@ static inline void flush_tlb_kernel_range(unsigned long start, unsigned long end
  	end = round_up(end, stride);
  	pages = (end - start) >> PAGE_SHIFT;
  
@@ -127,7 +127,7 @@ index a2d65d7d6aae..b812449f2219 100644
  		flush_tlb_all();
  		return;
  	}
-@@ -570,7 +595,11 @@ static inline void __flush_tlb_kernel_pgtable(unsigned long kaddr)
+@@ -581,7 +606,11 @@ static inline void __flush_tlb_kernel_pgtable(unsigned long kaddr)
  	unsigned long addr = __TLBI_VADDR(kaddr, 0);
  
  	dsb(ishst);
@@ -137,14 +137,14 @@ index a2d65d7d6aae..b812449f2219 100644
 +		__tlbi(vmalle1is);
 +	else
 +		__tlbi(vaae1is, addr);
- 	dsb(ish);
+ 	__tlbi_sync_s1ish();
  	isb();
  }
 diff --git a/arch/arm64/kernel/cpufeature.c b/arch/arm64/kernel/cpufeature.c
-index c840a93b9ef9..9d3b0e7e439b 100644
+index c31f8e17732a..bce9a852ccdf 100644
 --- a/arch/arm64/kernel/cpufeature.c
 +++ b/arch/arm64/kernel/cpufeature.c
-@@ -1095,9 +1095,22 @@ init_cpucap_indirect_list_from_array(const struct arm64_cpu_capabilities *caps)
+@@ -1096,9 +1096,22 @@ init_cpucap_indirect_list_from_array(const struct arm64_cpu_capabilities *caps)
  	}
  }
  
@@ -209,5 +209,5 @@ index 914282016069..82878074ae7d 100644
  	default:
  		force_signal_inject(SIGILL, ILL_ILLOPC, regs->pc, 0);
 -- 
-2.47.3
+2.53.0
 
