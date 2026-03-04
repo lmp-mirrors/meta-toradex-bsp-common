@@ -506,6 +506,9 @@ IMAGE_CMD:bootfs () {
 }
 TEZI_IMAGE_BOOTFS_PREFUNCS ??= "tezi_deploy_bootfs_files"
 do_image_bootfs[prefuncs] += "${TEZI_IMAGE_BOOTFS_PREFUNCS}"
+# Ensure all artifacts are deployed
+do_image_bootfs[recrdeptask] += "do_deploy"
+do_image_bootfs[deptask] += "do_image_complete"
 
 TEZI_IMAGE_TEZIIMG_PREFUNCS ??= "rootfs_tezi_run_json"
 IMAGE_TYPEDEP:teziimg += "${TEZI_BOOT_SUFFIX} ${TEZI_ROOT_SUFFIX}"
@@ -538,5 +541,6 @@ do_image_teziimg[dirs] += "${WORKDIR}/image-json ${DEPLOY_DIR_IMAGE}"
 do_image_teziimg[cleandirs] += "${WORKDIR}/image-json"
 do_image_teziimg[prefuncs] += "${TEZI_IMAGE_TEZIIMG_PREFUNCS}"
 do_image_teziimg[recrdeptask] += "do_deploy"
+do_image_teziimg[deptask] += "do_image_complete"
 do_image_teziimg[vardepsexclude] = "TEZI_VERSION TEZI_DATE"
 do_image_teziimg[network] = "1"
